@@ -19,7 +19,7 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquileres;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Alquileres;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Clientes;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Turismos;
@@ -49,7 +49,7 @@ public class ModeloTest {
 	private static Alquileres alquileres;
 
 	private static Cliente cliente;
-	private static Alquileres turismo;
+	private static Turismo turismo;
 	private static Alquiler alquiler;
 
 	@BeforeAll
@@ -62,7 +62,7 @@ public class ModeloTest {
 		when(cliente.getTelefono()).thenReturn("950112233");
 		turismo = mock();
 		mockConstruction(Turismos.class);
-		mockConstruction(Alquileres.class);
+		mockConstruction(Turismo.class);
 		when(turismo.getMarca()).thenReturn("Seat");
 		when(turismo.getModelo()).thenReturn("León");
 		when(turismo.getMatricula()).thenReturn("1234BCD");
@@ -97,7 +97,7 @@ public class ModeloTest {
 	@Test
 	void insertarTurismoLlamaTurismosInsertar() {
 		assertDoesNotThrow(() -> modelo.insertar(turismo));
-		assertDoesNotThrow(() -> verify(turismos).insertar(any(Alquileres.class)));
+		assertDoesNotThrow(() -> verify(turismos).insertar(any(Turismo.class)));
 		assertNotSame(turismo, modelo.buscar(turismo));
 	}
 
@@ -136,7 +136,7 @@ public class ModeloTest {
 	@Test
 	void buscarTurismoLlamaTurismosBuscar() {
 		assertDoesNotThrow(() -> modelo.insertar(turismo));
-		Alquileres turismoBuscado = modelo.buscar(turismo);
+		Turismo turismoBuscado = modelo.buscar(turismo);
 		verify(turismos).buscar(turismo);
 		assertNotSame(turismo, turismoBuscado);
 	}
@@ -234,10 +234,10 @@ public class ModeloTest {
 	
 	@Test
 	void getTurismosLlamaTurismosGet() {
-		List<Alquileres> turismosDevueltos = new ArrayList<>();
+		List<Turismo> turismosDevueltos = new ArrayList<>();
 		turismosDevueltos.add(turismo);
 		when(turismos.get()).thenReturn(turismosDevueltos);
-		List<Alquileres> turismosExistentes = modelo.getTurismos();
+		List<Turismo> turismosExistentes = modelo.getTurismos();
 		verify(turismos).get();
 		assertNotSame(turismo, turismosExistentes.get(0));
 	}

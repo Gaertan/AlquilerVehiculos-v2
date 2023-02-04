@@ -11,7 +11,7 @@ public class Alquiler {
 
 	
 	private Cliente cliente;
-	private Alquileres turismo;
+	private Turismo turismo;
 	
 	protected static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/LL/yyyy");
 	private final int PRECIO_DIA = 20;
@@ -20,7 +20,7 @@ public class Alquiler {
 	LocalDate fechaDevolucion;
 	
 	
-	public Alquiler(Cliente cliente, Alquileres turismo, LocalDate fechaAlquiler) {
+	public Alquiler(Cliente cliente, Turismo turismo, LocalDate fechaAlquiler) {
 	
 
 		setCliente(cliente);
@@ -32,7 +32,7 @@ public class Alquiler {
 	public Alquiler(Alquiler alquiler) {
 		if (alquiler == null) {throw new NullPointerException("ERROR: No es posible copiar un alquiler nulo.");}
 		setCliente( new Cliente (alquiler.getCliente() )  );
-		setTurismo( new Alquileres (alquiler.getTurismo() )  );
+		setTurismo( new Turismo (alquiler.getTurismo() )  );
 		setFechaAlquiler(alquiler.getFechaAlquiler());	
 	
 	}
@@ -49,12 +49,12 @@ public class Alquiler {
 	}
 
 
-	public Alquileres getTurismo() {
+	public Turismo getTurismo() {
 		return turismo;
 	}
 
 
-	private void setTurismo(Alquileres turismo) {
+	private void setTurismo(Turismo turismo) {
 		if (turismo == null) {throw new NullPointerException("ERROR: El turismo no puede ser nulo.");}
 	this.turismo=turismo;
 	}
