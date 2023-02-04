@@ -37,7 +37,7 @@ public class TurismosTest {
 		turismo2 = mock();
 		when(turismo2.getMatricula()).thenReturn("1111BBB");
 	}
-	
+
 	@BeforeEach
 	void init() {
 		turismos = new Turismos();
@@ -48,7 +48,7 @@ public class TurismosTest {
 		assertNotNull(turismos);
 		assertEquals(0, turismos.getCantidad());
 	}
-	
+
 	@Test
 	void getDevuelveTurismosCorrectamente() {
 		assertDoesNotThrow(() -> turismos.insertar(turismo1));
@@ -60,7 +60,7 @@ public class TurismosTest {
 		assertEquals(turismo2, copiaTurismos.get(1));
 		assertSame(turismo2, copiaTurismos.get(1));
 	}
-	
+
 	@Test
 	void insertarTurismoValidoInsertaCorrectamente() {
 		assertDoesNotThrow(() -> turismos.insertar(turismo1));
@@ -68,20 +68,20 @@ public class TurismosTest {
 		assertEquals(turismo1, turismos.buscar(turismo1));
 		assertSame(turismo1, turismos.buscar(turismo1));
 	}
-	
+
 	@Test
 	void insertarTurismoNuloLanzaExcepcion() {
 		NullPointerException npe = assertThrows(NullPointerException.class, () -> turismos.insertar(null));
 		assertEquals(MENSAJE_ERROR_INSERTAR_CLIENTE_NULO, npe.getMessage());
 	}
-	
+
 	@Test
 	void insertarTurismoRepetidoLanzaExcepcion() {
 		assertDoesNotThrow(() -> turismos.insertar(turismo1));
 		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> turismos.insertar(turismo1));
 		assertEquals(MENSAJE_ERROR_CLIENTE_EXISTE, onse.getMessage());
 	}
-	
+
 	@Test
 	void borrarTurismoExistenteBorraTurismoCorrectamente() {
 		assertDoesNotThrow(() -> turismos.insertar(turismo1));
@@ -89,7 +89,7 @@ public class TurismosTest {
 		assertEquals(0, turismos.getCantidad());
 		assertNull(turismos.buscar(turismo1));
 	}
-	
+
 	@Test
 	void borrarTurismoNoExistenteLanzaExcepcion() {
 		assertDoesNotThrow(() -> turismos.insertar(turismo1));
@@ -105,19 +105,19 @@ public class TurismosTest {
 		assertEquals(MENSAJE_ERROR_BORRAR_CLIENTE_NULO, npe.getMessage());
 		assertEquals(1, turismos.getCantidad());
 	}
-	
+
 	@Test
 	void busarTurismoExistenteDevuelveTurismoCorrectamente() {
 		assertDoesNotThrow(() -> turismos.insertar(turismo1));
 		assertEquals(turismo1, turismos.buscar(turismo1));
 		assertSame(turismo1, turismos.buscar(turismo1));
 	}
-	
+
 	@Test
 	void busarTurismoeNoExistenteDevuelveTurismoNulo() {
 		assertNull(turismos.buscar(turismo1));
 	}
-	
+
 	@Test
 	void buscarTurismoNuloLanzaExcepcion() {
 		assertDoesNotThrow(() -> turismos.insertar(turismo1));

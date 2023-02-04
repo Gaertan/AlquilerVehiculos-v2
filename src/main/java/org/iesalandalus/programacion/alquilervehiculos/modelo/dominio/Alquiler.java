@@ -9,32 +9,32 @@ import javax.naming.OperationNotSupportedException;
 
 public class Alquiler {
 
-	
+
 	private Cliente cliente;
 	private Turismo turismo;
-	
+
 	protected static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/LL/yyyy");
 	private final int PRECIO_DIA = 20;
 	private int precio = 0;
 	LocalDate fechaAlquiler;
 	LocalDate fechaDevolucion;
-	
-	
+
+
 	public Alquiler(Cliente cliente, Turismo turismo, LocalDate fechaAlquiler) {
-	
+
 
 		setCliente(cliente);
 		setTurismo(turismo);
 		setFechaAlquiler(fechaAlquiler);
 	}
-	
-	
+
+
 	public Alquiler(Alquiler alquiler) {
 		if (alquiler == null) {throw new NullPointerException("ERROR: No es posible copiar un alquiler nulo.");}
 		setCliente( new Cliente (alquiler.getCliente() )  );
 		setTurismo( new Turismo (alquiler.getTurismo() )  );
-		setFechaAlquiler(alquiler.getFechaAlquiler());	
-	
+		setFechaAlquiler(alquiler.getFechaAlquiler());
+
 	}
 
 
@@ -82,7 +82,7 @@ public class Alquiler {
 		if (fechaDevolucion == null) {throw new NullPointerException("ERROR: La fecha de devolución no puede ser nula.");}
 		if(fechaDevolucion.isAfter(LocalDate.now())) {throw new IllegalArgumentException("ERROR: La fecha de devolución no puede ser futura.");}
 		if(fechaDevolucion.isBefore(this.fechaAlquiler)||fechaDevolucion==fechaAlquiler) {throw new IllegalArgumentException("ERROR: La fecha de devolución debe ser posterior a la fecha de alquiler.");}
-		
+
 		this.fechaDevolucion = fechaDevolucion;
 	}
 
@@ -90,7 +90,7 @@ public class Alquiler {
 		if(this.fechaDevolucion!=null) {throw new OperationNotSupportedException("ERROR: La devolución ya estaba registrada.");}
 		setFechaDevolucion(fechaDevolucion);
 	}
-	
+
 	public int getPrecio() {
 		int factorCilindrada =  (this.turismo.getCilindrada()/10);
 		int numDias = 0;
@@ -110,15 +110,14 @@ public class Alquiler {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Alquiler other = (Alquiler) obj;
 		return Objects.equals(cliente, other.cliente) && Objects.equals(fechaAlquiler, other.fechaAlquiler)
 				&& Objects.equals(turismo, other.turismo);
 	}
-	
+
+	@Override
 	public String toString() {
 		if(fechaDevolucion==null) {return String.format("%s <---> %s, %s - %s (%d€)", cliente, turismo,
 				FORMATO_FECHA.format(fechaAlquiler), "Aún no devuelto", 0);}
@@ -128,6 +127,6 @@ public class Alquiler {
 		}
 
 	}
-	
-	
+
+
 }

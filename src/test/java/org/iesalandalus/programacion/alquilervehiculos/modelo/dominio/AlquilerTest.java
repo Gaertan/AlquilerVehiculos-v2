@@ -54,7 +54,7 @@ public class AlquilerTest {
 		creaComportamientoTurismo();
 		creaComportamientoCliente();
 	}
-	
+
 	private void creaComportamientoTurismo() {
 		turismo = mock();
 		when(turismo.getMarca()).thenReturn("Seat");
@@ -62,22 +62,22 @@ public class AlquilerTest {
 		when(turismo.getMatricula()).thenReturn("1234BCD");
 		when(turismo.getCilindrada()).thenReturn(90);
 	}
-	
+
 	private void setComportamiento(Turismo turismo, String matricula) {
 		when(turismo.getMatricula()).thenReturn(matricula);
 	}
-	
+
 	private void creaComportamientoCliente() {
 		cliente = mock();
 		when(cliente.getNombre()).thenReturn("Bob Esponja");
 		when(cliente.getDni()).thenReturn("11223344B");
 		when(cliente.getTelefono()).thenReturn("950112233");
 	}
-	
+
 	private void setComportamiento(Cliente cliente, String dni) {
 		when(cliente.getDni()).thenReturn(dni);
 	}
-	
+
 	@Test
 	void constructorClienteValidoTurismoValidoFechaAlquilerValidaCreaAlquilerCorrectamente() {
 		alquilerHoy = new Alquiler(cliente, turismo, hoy);

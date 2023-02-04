@@ -32,7 +32,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 public class ModeloTest {
-	
+
 	private static final String MENSAJE_ERROR_INSERTAR_ALQUILER_NULO = "ERROR: No se puede realizar un alquiler nulo.";
 	private static final String MENSAJE_ERROR_INSERTAR_ALQUILER_CLIENTE_NO_EXISTE = "ERROR: No existe el cliente del alquiler.";
 	private static final String MENSAJE_ERROR_INSERTAR_ALQUILER_TURISMO_NO_EXISTE = "ERROR: No existe el turismo del alquiler.";
@@ -81,7 +81,7 @@ public class ModeloTest {
 	void init() {
 		MockitoAnnotations.openMocks(this);
 	}
-	
+
 	@Test
 	void terminarNoHaceNada() {
 		assertDoesNotThrow(() -> modelo.terminar());
@@ -112,7 +112,7 @@ public class ModeloTest {
 		assertDoesNotThrow(() -> orden.verify(alquileres).insertar(any(Alquiler.class)));
 		assertNotSame(alquiler, modelo.buscar(alquiler));
 	}
-	
+
 	@Test
 	void insertarAlquilerAlquilerNoValidoLanzaExcepcion() {
 		Alquiler alquilerNulo = null;
@@ -156,7 +156,7 @@ public class ModeloTest {
 		assertDoesNotThrow(() -> modelo.modificar(cliente, "Patricio Estrella", "950123456"));
 		assertDoesNotThrow(() -> verify(clientes).modificar(cliente, "Patricio Estrella", "950123456"));
 	}
-	
+
 	@Test
 	void devolverAlquilerLlamaAlquileresBuscarAlquilerDevolver() {
 		when(alquileres.buscar(alquiler)).thenReturn(alquiler);
@@ -166,7 +166,7 @@ public class ModeloTest {
 		orden.verify(alquileres).buscar(alquiler);
 		assertDoesNotThrow(() -> orden.verify(alquiler).devolver(hoy));
 	}
-	
+
 	@Test
 	void devolverAqluilerNoValidoLanzaExcepcion() {
 		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> modelo.devolver(alquiler, LocalDate.now()));
@@ -214,14 +214,14 @@ public class ModeloTest {
 		alquileresTurismo.add(alquiler2);
 		when(alquileres.get(turismo)).thenReturn(alquileresTurismo);
 	}
-	
+
 	@Test
 	void borrarAlquilerLllamaAlquileresBorrar() {
 		when(alquileres.buscar(alquiler)).thenReturn(alquiler);
 		assertDoesNotThrow(() -> modelo.borrar(alquiler));
 		assertDoesNotThrow(() -> verify(alquileres).borrar(alquiler));
 	}
-	
+
 	@Test
 	void getClientesLlamaClientesGet() {
 		List<Cliente> clientesDevueltos = new ArrayList<>();
@@ -231,7 +231,7 @@ public class ModeloTest {
 		verify(clientes).get();
 		assertNotSame(cliente, clientesExistentes.get(0));
 	}
-	
+
 	@Test
 	void getTurismosLlamaTurismosGet() {
 		List<Turismo> turismosDevueltos = new ArrayList<>();
@@ -241,7 +241,7 @@ public class ModeloTest {
 		verify(turismos).get();
 		assertNotSame(turismo, turismosExistentes.get(0));
 	}
-	
+
 	@Test
 	void getAlquileresLlamaAlquileresGet() {
 		List<Alquiler> alquileresDevueltos = new ArrayList<>();
@@ -251,7 +251,7 @@ public class ModeloTest {
 		verify(alquileres).get();
 		assertNotSame(alquiler, alquileresExistentes.get(0));
 	}
-	
+
 	@Test
 	void getAlquileresClienteLlamaAlquileresGetCliente() {
 		List<Alquiler> alquileresDevueltos = new ArrayList<>();
@@ -261,7 +261,7 @@ public class ModeloTest {
 		verify(alquileres).get(cliente);
 		assertNotSame(alquiler, alquileresCliente.get(0));
 	}
-	
+
 	@Test
 	void getAlquileresTurismoLlamaAlquileresGetTurismo() {
 		List<Alquiler> alquileresDevueltos = new ArrayList<>();
