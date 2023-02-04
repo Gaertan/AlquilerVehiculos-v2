@@ -13,12 +13,13 @@ public class Cliente {
 	private String dni;
 	private String telefono;
 	
-	
+
+
 	public Cliente(String nombre, String dni, String telefono) {
 
-	setNombre(nombre);
-	setDni(dni);
-	setTelefono(telefono);
+		setNombre(nombre);
+		setDni(dni);
+		setTelefono(telefono);
 	
 	}
 	
@@ -81,10 +82,10 @@ public class Cliente {
 	
 	public String getTelefono(){String telefonoR = this.telefono;return telefonoR;};
 	public void setTelefono(String telefono){
-	if (telefono == null) {throw new NullPointerException("ERROR: El teléfono no puede ser nulo.");}
-	if (telefono.trim().isEmpty()) {throw new IllegalArgumentException("ERROR: El telefono de un cliente no puede estar vacío.");}
-	if (!telefono.matches(ER_TELEFONO)) {throw new IllegalArgumentException("ERROR: El teléfono no tiene un formato válido.");}
-	this.telefono = telefono;
+		if (telefono == null) {throw new NullPointerException("ERROR: El teléfono no puede ser nulo.");}
+		if (telefono.trim().isEmpty()) {throw new IllegalArgumentException("ERROR: El telefono de un cliente no puede estar vacío.");}
+		if (!telefono.matches(ER_TELEFONO)) {throw new IllegalArgumentException("ERROR: El teléfono no tiene un formato válido.");}
+		this.telefono = telefono;
 	}
 	
 	public Cliente getClienteConDni(String dni){
@@ -92,7 +93,7 @@ public class Cliente {
 		if (!dni.matches(ER_DNI)) {throw new IllegalArgumentException("ERROR: El dni del cliente no tiene un formato válido.");}		
 		if(!comprobarLetraDni(dni)) {throw new IllegalArgumentException("ERROR: La letra del dni del cliente no es correcta.");}
 		//no sabia si poner bob esponja como en los tests la verdad
-		Cliente clienteR =new Cliente("Andres Garcia Perez",dni,"666666666");
+		Cliente clienteR = new Cliente("Andres Garcia Perez",dni,"666666666");
 		return	clienteR;	
 		}
 		
@@ -115,6 +116,7 @@ public class Cliente {
 		Cliente other = (Cliente) obj;
 		return Objects.equals(dni, other.dni);
 	};
+	
 	@Override
 	public String toString() {return (String.format("%s - %s (%s)", nombre, dni, telefono) ) ;}
 	
