@@ -92,7 +92,6 @@ public class ClienteTest {
 	
 	@Test
 	void getClienteConDniValidoDevuelveClienteConDichoDni() {
-		Cliente cliente = new Cliente(null, null, null);
 		Cliente cliente = Cliente.getClienteConDni(DNI_VALIDO);
 		assertEquals(DNI_VALIDO, cliente.getDni());
 	}
