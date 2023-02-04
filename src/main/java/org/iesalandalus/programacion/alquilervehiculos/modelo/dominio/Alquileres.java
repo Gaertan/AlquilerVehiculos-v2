@@ -2,7 +2,7 @@ package org.iesalandalus.programacion.alquilervehiculos.modelo.dominio;
 
 import java.util.Objects;
 
-public class Turismo {
+public class Alquileres {
 	private final String ER_MARCA="\\[A-Za-z](-|\\s|)?[a-zA-ZáéíóúüñÁÉÍÓÚÑ]+";
 	private final String ER_MATRICULA="\\d{4}\s{0,1}([B-D]|[F-H]|[J-N]|[P-T]|[V-Z]){3}{4}";
 	
@@ -11,7 +11,7 @@ public class Turismo {
 	private int cilindrada;
 	private String matricula;
 	
-	public Turismo(String marca, String modelo, int cilindrada, String matricula) {
+	public Alquileres(String marca, String modelo, int cilindrada, String matricula) {
 
 		setMarca(marca);
 		setModelo(modelo);
@@ -19,7 +19,7 @@ public class Turismo {
 		setMatricula(matricula);
 	}
 	
-	public Turismo(Turismo turismo) {
+	public Alquileres(Alquileres turismo) {
 		if (turismo == null) {
 			throw new NullPointerException("ERROR: No es posible copiar un turismo nulo.");
 		}	
@@ -60,9 +60,9 @@ public class Turismo {
 	public int getCilindrada() {return this.cilindrada;}
 	public String getMatricula() {return this.matricula;}
 	
-	public Turismo getTurismoConMatricula(String matricula){
+	public Alquileres getTurismoConMatricula(String matricula){
 		if (matricula==null) if (matricula == null) {throw new NullPointerException("ERROR: La matrícula no puede ser nula.");}
-		return new Turismo("Seat","Leon",90,matricula);
+		return new Alquileres("Seat","Leon",90,matricula);
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class Turismo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Turismo other = (Turismo) obj;
+		Alquileres other = (Alquileres) obj;
 		return Objects.equals(matricula, other.matricula);
 	}
 

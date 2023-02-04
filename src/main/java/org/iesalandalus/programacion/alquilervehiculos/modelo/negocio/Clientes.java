@@ -16,9 +16,10 @@ public class Clientes {
 		coleccionClientes = new ArrayList<>();
 	}
 
-	public Cliente[] get() {
+	/*public Cliente[] get() {
 		return (Cliente[]) coleccionClientes.toArray();
-	}
+	}*/
+	public List<Cliente> get(){return coleccionClientes;}
 	
 	public int getCantidad() {
 
