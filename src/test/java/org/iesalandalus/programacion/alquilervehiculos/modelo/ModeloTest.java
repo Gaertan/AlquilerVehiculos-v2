@@ -53,7 +53,7 @@ public class ModeloTest {
 	private static Alquiler alquiler;
 
 	@BeforeAll
-	public static void setup() {
+	public static main void setup() {
 		cliente = mock();
 		mockConstruction(Clientes.class);
 		mockConstruction(Cliente.class);
