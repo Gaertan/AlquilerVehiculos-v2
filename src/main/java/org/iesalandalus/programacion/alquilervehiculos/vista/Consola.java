@@ -19,30 +19,30 @@ public class Consola {
 	
 	private void Consola() {}
 	
-	public void mostrarCabecera(String mensaje){System.out.println(mensaje);
+	public static void mostrarCabecera(String mensaje){System.out.println(mensaje);
 	for(int i = 0;i==mensaje.length();i++) {System.out.print("-");}}
 	
-	public void mostrarMenu(){
+	public static void mostrarMenu(){
 		mostrarCabecera("Gestión de reservas de vehiculos");
 	for (Opcion opcion: Opcion.values()) {
 		System.out.println(opcion);
 	}}
 	
-	private String leerCadena(String mensaje){
+	private static String leerCadena(String mensaje){
 		System.out.println(mensaje);
 		String cadena="";
 		while(cadena ==""||cadena==null||cadena==" "||cadena.trim().isEmpty()) {cadena = Entrada.cadena();}
 		return cadena;
 	}
 	
-	private Integer leerEntero(String mensaje){
+	private static Integer leerEntero(String mensaje){
 		System.out.println(mensaje);
 		Integer entero = -1;
 		while(entero<0) {entero=Entrada.entero();}
 		return entero;
 	}
 	
-	private LocalDate leerFecha(String mensaje){
+	private static LocalDate leerFecha(String mensaje){
 		System.out.println(mensaje);
 		LocalDate fecha = null;
 		while(fecha==null) {
@@ -52,7 +52,7 @@ public class Consola {
 		return fecha;
 	}
 	
-	public Opcion elegirOpcion() throws OperationNotSupportedException{
+	public static Opcion elegirOpcion() throws OperationNotSupportedException{
 		
 		try{Opcion opcionR = null;
 
@@ -64,7 +64,7 @@ public class Consola {
 	}
 	
 	
-	public Cliente leerCliente(){
+	public static Cliente leerCliente(){
 		 Cliente cliente = null;
 		 String nombre ="Andrés García Gaertan";
 		 String telefono = "622099498";
@@ -81,7 +81,7 @@ public class Consola {
 	}
 	
 	
-	public Cliente leerClienteDni(){
+	public static Cliente leerClienteDni(){
 		 Cliente cliente = null;
 		 String nombre ="Andrés García Gaertan";
 		 String telefono = "622099498";
@@ -100,7 +100,7 @@ public class Consola {
 	}
 	
 	
-	public String leerNombre(){
+	public static String leerNombre(){
 			String nombre;
 		do {System.out.print("Introduzca el nombre ; ");
 			nombre = Entrada.cadena();} 
@@ -108,7 +108,7 @@ public class Consola {
 	return nombre;
 	}
 	
-	public String leerTelefono(){
+	public static String leerTelefono(){
 		String telefono;
 	do {System.out.print("Introduzca el telefono ; ");
 	telefono = Entrada.cadena();} 
@@ -117,7 +117,7 @@ public class Consola {
 	}
 	
 	
-	public Turismo leerTurismo(){
+	public static Turismo leerTurismo(){
 		Turismo turismo = null;
 		 String marca;
 		 String modelo;
@@ -150,7 +150,7 @@ public class Consola {
 	}
 	
 	
-	public Turismo leerTurismoMatricula(){
+	public static Turismo leerTurismoMatricula(){
 		
 		Turismo turismo = null;
 		 String marca = "Seat";
@@ -175,7 +175,7 @@ public class Consola {
 	}
 	
 	
-	public Alquiler leerAlquiler(){
+	public static Alquiler leerAlquiler(){
 		Cliente cliente;
 		Turismo turismo;
 		LocalDate fechaDate;
@@ -197,7 +197,7 @@ public class Consola {
 	}
 	
 	
-	public LocalDate leerFechaDevolucion(){
+	public static LocalDate leerFechaDevolucion(){
 		String fecha;
 		boolean status = false;
 		do {
