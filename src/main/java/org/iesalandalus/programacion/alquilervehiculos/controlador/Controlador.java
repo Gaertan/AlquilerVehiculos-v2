@@ -3,6 +3,8 @@ package org.iesalandalus.programacion.alquilervehiculos.controlador;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.naming.OperationNotSupportedException;
+
 import org.iesalandalus.programacion.alquilervehiculos.modelo.Modelo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
@@ -13,44 +15,48 @@ public class Controlador {
 
 	private Vista vista;
 	private Modelo modelo;
-	public void controlador(Modelo modelo, Vista vista){
-		if(modelo!=null&&vista!=null) {this.modelo=modelo;this.vista=vista;};}
+	public Controlador(Modelo modelo, Vista vista){
+		if(modelo!=null&&vista!=null) {this.modelo=modelo;this.vista=vista;};vista.setControlador(this);}
 	
-	public void  comenzar(){}
 	
-	public void  terminar(){}
+
+
+
+	public void  comenzar(){modelo.comenzar();vista.comenzar();}
 	
-	public void  insertar(Cliente cliente){}
+	public void  terminar(){modelo.terminar();vista.terminar();}
 	
-	public void insertar(Turismo turismo){}
+	public void  insertar(Cliente cliente) throws OperationNotSupportedException{modelo.insertar(cliente);}
 	
-	public void  insertar(Alquiler alquiler){}
+	public void insertar(Turismo turismo) throws OperationNotSupportedException{modelo.insertar(turismo);}
 	
-	public Cliente buscar(Cliente cliente){}
+	public void  insertar(Alquiler alquiler) throws OperationNotSupportedException{modelo.insertar(alquiler);}
 	
-	public Turismo buscar(Turismo turismo){}
+	public Cliente buscar(Cliente cliente) throws OperationNotSupportedException{return modelo.buscar(cliente);}
 	
-	public Alquiler buscar(Alquiler alquiler){}
+	public Turismo buscar(Turismo turismo) throws OperationNotSupportedException{return modelo.buscar(turismo);}
 	
-	public void  modificar(Cliente cliente, String nombre, String telefono){}
+	public Alquiler buscar(Alquiler alquiler) throws OperationNotSupportedException{return modelo.buscar(alquiler);}
 	
-	public void  devolver(Alquiler alquiler, LocalDate fechaDevolucion){}
+	public void  modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException{modelo.modificar(cliente, nombre, telefono);}
 	
-	public void  borrar(Cliente cliente){}
+	public void  devolver(Alquiler alquiler, LocalDate fechaDevolucion){modelo.devolver(alquiler, fechaDevolucion);}
 	
-	public void  borrar(Turismo turismo){}
+	public void  borrar(Cliente cliente) throws OperationNotSupportedException{modelo.Borrar(cliente);}
 	
-	public void  borrar(Alquiler alquiler){}
+	public void  borrar(Turismo turismo) throws OperationNotSupportedException{modelo.Borrar(turismo);}
 	
-	public List<Cliente> getClientes(Cliente cliente){}
+	public void  borrar(Alquiler alquiler) throws OperationNotSupportedException{modelo.Borrar(alquiler);}
 	
-	public List<Turismo> getTurismos(Turismo turismo){}
+	public List<Cliente> getClientes(Cliente cliente){return modelo.getClientes();}
 	
-	public List<Alquiler> getAlquileres(Alquiler alquiler){}
+	public List<Turismo> getTurismos(Turismo turismo){return modelo.getTurismos();}
 	
-	public List<Alquiler> getAlquileres(Cliente cliente){}
+	public List<Alquiler> getAlquileres(Alquiler alquiler){return modelo.getAlquileres();}
 	
-	public List<Alquiler> getAlquileres(Turismo turismo){}
+	public List<Alquiler> getAlquileres(Cliente cliente){return modelo.getAlquileres(cliente);}
+	
+	public List<Alquiler> getAlquileres(Turismo turismo){return modelo.getAlquileres(turismo);}
 	
 	
 	
