@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Cliente {
 
 	private final String ER_DNI = "\\d{8}[A-Za-z]";
-	private final String ER_TELEFONO = "\\d{9}";
+	private final String ER_TELEFONO = "[96]\\d{8}";
 	private final String ER_NOMBRE = "(^(?=.{1,40}$)[a-zA-ZáéíóúüñÁÉÍÓÚÑ]+(?:[\\s][a-zA-ZáéíóúüñÁÉÍÓÚÑ]+)*$\r\n)[1,3]";
 
 	private String nombre ="Andrés García Gaertan";

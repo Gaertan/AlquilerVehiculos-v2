@@ -17,16 +17,21 @@ public class Consola {
 	protected static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern(PATRON_FECHA);
 	
 	
-	private void Consola() {}
+	private Consola() {}
 	
-	public static void mostrarCabecera(String mensaje){System.out.println(mensaje);
-	for(int i = 0;i==mensaje.length();i++) {System.out.print("-");}}
+	public static void mostrarCabecera(String mensaje){
+		System.out.println("");System.out.println(mensaje);		
+		for(int i = 0;i<=mensaje.length();i++) {System.out.print("-");}
+		System.out.println("");
+		}
 	
 	public static void mostrarMenu(){
 		mostrarCabecera("Gestión de reservas de vehiculos");
-	for (Opcion opcion: Opcion.values()) {
-		System.out.println(opcion);
-	}}
+		System.out.println("");
+		for (Opcion opcion: Opcion.values()) {
+			System.out.print(opcion.ordinal());System.out.print("- ");System.out.println(opcion);
+		}
+	}
 	
 	private static String leerCadena(String mensaje){
 		System.out.println(mensaje);
@@ -47,7 +52,7 @@ public class Consola {
 		LocalDate fecha = null;
 		while(fecha==null) {
 			try { LocalDate localDate = LocalDate.parse(Entrada.cadena(),FORMATO_FECHA);fecha=localDate;}
-			catch(Exception e) {System.out.println("algo ha salido mal leyendo la fecha;");e.getMessage();}
+			catch(Exception e) {System.out.println("algo ha salido mal leyendo la fecha;");System.out.print(e.getMessage());}
 		}
 		return fecha;
 	}
@@ -59,7 +64,7 @@ public class Consola {
 			while(opcionR==null) {int ordinal = leerEntero("Introduzca el numero de la opción a ejecutar");opcionR = Opcion.values()[ordinal];}
 			return opcionR;
 				
-			}catch(Exception e) {System.out.println("algo ha salido mal al escoger opcion;");e.getMessage();}
+			}catch(Exception e) {System.out.println("algo ha salido mal al escoger opcion;");System.out.print(e.getMessage());}
 		return null;
 	}
 	
@@ -75,7 +80,7 @@ public class Consola {
 				nombre = leerNombre();
 				telefono = leerTelefono();
 				try{Cliente clienteR = new Cliente(nombre,dni,telefono);cliente = clienteR;return clienteR;}
-				catch(Exception e) {System.out.println("algo ha salido mal leyendo el cliente;");e.getMessage();}
+				catch(Exception e) {System.out.println("algo ha salido mal leyendo el cliente;");System.out.print(e.getMessage());}
 		 }while(cliente == null);
 		return cliente;
 	}
@@ -90,7 +95,7 @@ public class Consola {
 			 	dni = leerCadena("Introduzca el dni, en mayusculas, sin espacios ni simbolos");
 				
 				try{Cliente clienteR = new Cliente(nombre,dni,telefono);cliente = clienteR;return clienteR;}
-				catch(Exception e) {System.out.println("algo ha salido mal leyendo el dni;");e.getMessage();}
+				catch(Exception e) {System.out.println("algo ha salido mal leyendo el dni;");System.out.print(e.getMessage());}
 		 }while(cliente == null);
 
 		
@@ -141,7 +146,7 @@ public class Consola {
 			while (matricula.equals(""));
 			
 			try{Turismo turismoR = new Turismo(marca,modelo,cilindrada,matricula);turismo = turismoR;return turismo;}
-			catch(Exception e) {System.out.println("algo ha salido mal leyendo el turismo;");e.getMessage();}}while(turismo == null);
+			catch(Exception e) {System.out.println("algo ha salido mal leyendo el turismo;");System.out.print(e.getMessage());}}while(turismo == null);
 
 			
 			return turismo;
@@ -156,14 +161,13 @@ public class Consola {
 		 String marca = "Seat";
 		 String modelo = "Leon";
 		 int cilindrada = 1000;
-		 String matricula;
-		
+		 String matricula = "1111BBB";
 		do { do {System.out.print("Introduzca la matricula ; ");
 			matricula = Entrada.cadena();} 
 			while (matricula.equals(""));
 		 
 			try{Turismo turismoR = new Turismo(marca,modelo,cilindrada,matricula);turismo = turismoR;return turismo;}
-			catch(Exception e) {System.out.println("algo ha salido mal leyendo la matricula;");e.getMessage();}
+			catch(Exception e) {System.out.println("algo ha salido mal leyendo la matricula;");System.out.print(e.getMessage());}
 		}
 		while(turismo == null);
 
@@ -188,7 +192,7 @@ public class Consola {
 
 				
 				try {Alquiler alquilerR = new Alquiler(cliente,turismo,fechaDate);alquiler=alquilerR;}
-				catch(Exception e) {System.out.println("algo ha salido mal leyendo el alquiler;");e.getMessage();}
+				catch(Exception e) {System.out.println("algo ha salido mal leyendo el alquiler;");System.out.print(e.getMessage());}
 			
 		}
 		while(alquiler == null);

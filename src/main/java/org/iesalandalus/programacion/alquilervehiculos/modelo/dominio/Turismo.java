@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Turismo {
 	private final String ER_MARCA="\\[A-Za-z](-|\\s|)?[a-zA-ZáéíóúüñÁÉÍÓÚÑ]+";
-	private final String ER_MATRICULA="\\d{4}\s{0,1}([B-D]|[F-H]|[J-N]|[P-T]|[V-Z]){3}{4}";
+	private final String ER_MATRICULA="\\d{4}\s{0,1}([B-D]|[F-H]|[J-N]|[P-T]|[V-Z]){3}";
 
 	private String marca;
 	private String modelo;
