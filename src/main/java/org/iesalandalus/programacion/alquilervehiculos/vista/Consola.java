@@ -75,11 +75,11 @@ public class Consola {
 		 String telefono = "622099498";
 		 String dni;
 
-		 do {
+		 do {	nombre = leerNombre();
 			 	dni = leerCadena("Introduzca el dni, en mayusculas, sin espacios ni simbolos");
-				nombre = leerNombre();
+				
 				telefono = leerTelefono();
-				try{Cliente clienteR = new Cliente(nombre,dni,telefono);cliente = clienteR;return clienteR;}
+				try{Cliente clienteR = new Cliente(nombre,dni,telefono);return clienteR;}
 				catch(Exception e) {System.out.println("algo ha salido mal leyendo el cliente;");System.out.print(e.getMessage());}
 		 }while(cliente == null);
 		return cliente;
@@ -141,7 +141,7 @@ public class Consola {
 			cilindrada = Entrada.entero();} 
 			while (cilindrada<=0);
 			
-			do {System.out.print("Introduzca la matricula ; ");
+			do {System.out.print("Introduzca la matricula (4 números y 3 letras) ; ");
 			matricula = Entrada.cadena();} 
 			while (matricula.equals(""));
 			

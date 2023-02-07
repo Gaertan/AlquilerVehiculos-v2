@@ -3,7 +3,7 @@ package org.iesalandalus.programacion.alquilervehiculos.modelo.dominio;
 import java.util.Objects;
 
 public class Turismo {
-	private final String ER_MARCA="\\[A-Za-z](-|\\s|)?[a-zA-ZáéíóúüñÁÉÍÓÚÑ]+";
+	private final String ER_MARCA="[A-Za-z](-|\\s|)?[a-zA-ZáéíóúüñÁÉÍÓÚÑ]+";
 	private final String ER_MATRICULA="\\d{4}\s{0,1}([B-D]|[F-H]|[J-N]|[P-T]|[V-Z]){3}";
 
 	private String marca;
@@ -31,6 +31,8 @@ public class Turismo {
 	}
 	private void setMarca(String marca){
 		if (marca == null) {throw new NullPointerException("ERROR: La marca no puede ser nula.");}
+		marca.trim();
+		if(marca==""||marca==null||marca==" ") {throw new IllegalArgumentException("ERROR: La marca no puede estar en blanco.");}
 		if(!marca.matches(ER_MARCA)) {throw new IllegalArgumentException("ERROR: La marca no tiene un formato válido.");}
 		else{this.marca=marca;}}
 
@@ -38,7 +40,7 @@ public class Turismo {
 	private void setModelo(String modelo) {
 		if (modelo == null) {throw new NullPointerException("ERROR: El modelo no puede ser nula.");}
 		modelo.trim();
-		if(modelo=="") {throw new IllegalArgumentException("ERROR: El modelo no puede estar en blanco.");}
+		if(modelo==""||modelo==null||modelo==" ") {throw new IllegalArgumentException("ERROR: El modelo no puede estar en blanco.");}
 		else{this.modelo=modelo;}}
 
 
@@ -51,6 +53,9 @@ public class Turismo {
 
 	private void setMatricula(String matricula) {
 		if (matricula == null) {throw new NullPointerException("ERROR: La matrícula no puede ser nula.");}
+		matricula.replaceAll(" ", "");
+		matricula.toUpperCase();
+		if(matricula.isEmpty()) {throw new IllegalArgumentException("ERROR: La matrícula no puede estar vacía.");}
 		if(!matricula.matches(ER_MATRICULA)) {throw new IllegalArgumentException("ERROR: La matrícula no tiene un formato válido.");}
 		this.matricula=matricula;
 	}

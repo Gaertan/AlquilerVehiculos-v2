@@ -183,32 +183,32 @@ public class Vista {
 	
 	private void listarCliente() {
 		Consola.mostrarCabecera("Opcion listar clientes");
-		Cliente cliente = Consola.leerCliente();
-		try{System.out.println(controlador.getClientes(cliente).toString());}catch(Exception e) {e.getMessage();}
+		//Cliente cliente = Consola.leerCliente();
+		try{System.out.println(controlador.getClientes().toString());}catch(Exception e) {e.getMessage();}
 	}
 	
 	private void listarTurismo() {
 		Consola.mostrarCabecera("Opcion listar todos los turismos");
-		Turismo turismo = Consola.leerTurismo();
-		try{System.out.println(controlador.getTurismos(turismo).toString());}catch(Exception e) {e.getMessage();}
+		//Turismo turismo = Consola.leerTurismo();
+		try{System.out.println(controlador.getTurismos().toString());}catch(Exception e) {e.getMessage();}
 	}
 	
 	private void listarAlquiler() {
 		Consola.mostrarCabecera("Opcion listar alquileres");
-		Alquiler alquiler = Consola.leerAlquiler();
-		try{System.out.println(controlador.getAlquileres(alquiler).toString());}catch(Exception e) {e.getMessage();}
+		//Alquiler alquiler = Consola.leerAlquiler();
+		try{System.out.println(controlador.getAlquileres().toString());}catch(Exception e) {e.getMessage();}
 
 	}
 	
 	private void listarAlquileresCliente() {
 		Consola.mostrarCabecera("Opcion listar alquileres de un cliente");
-		Cliente cliente = Consola.leerCliente();
+		Cliente cliente = Consola.leerClienteDni();
 		try{System.out.println(controlador.getAlquileres(cliente).toString());}catch(Exception e) {e.getMessage();}
 	}
 	
 	private void listarAlquileresTurismo() {
 		Consola.mostrarCabecera("Opcion listar alquileres de un turismo");
-		Turismo turismo = Consola.leerTurismo();
+		Turismo turismo = Consola.leerTurismoMatricula();
 		try{System.out.println(controlador.getAlquileres(turismo).toString());}catch(Exception e) {e.getMessage();}
 	}
 

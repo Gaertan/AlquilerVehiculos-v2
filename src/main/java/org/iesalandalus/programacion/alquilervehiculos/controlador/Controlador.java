@@ -48,11 +48,11 @@ public class Controlador {
 	
 	public void  borrar(Alquiler alquiler) throws OperationNotSupportedException{modelo.Borrar(alquiler);}
 	
-	public List<Cliente> getClientes(Cliente cliente){return modelo.getClientes();}
+	public List<Cliente> getClientes(){return modelo.getClientes();}
 	
-	public List<Turismo> getTurismos(Turismo turismo){return modelo.getTurismos();}
+	public List<Turismo> getTurismos(){return modelo.getTurismos();}
 	
-	public List<Alquiler> getAlquileres(Alquiler alquiler){return modelo.getAlquileres();}
+	public List<Alquiler> getAlquileres(){return modelo.getAlquileres();}
 	
 	public List<Alquiler> getAlquileres(Cliente cliente){return modelo.getAlquileres(cliente);}
 	
