@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ClienteTest {
-	
+
 	private static final String MENSAJE_ERROR_NOMBRE_NULO = "ERROR: El nombre no puede ser nulo.";
 	private static final String MENSAJE_ERROR_FORMATO_NOMBRE_NO_VALIDO = "ERROR: El nombre no tiene un formato válido.";
 	private static final String MENSAJE_ERROR_DNI_NULO = "ERROR: El DNI no puede ser nulo.";
@@ -22,9 +22,9 @@ public class ClienteTest {
 	private static final String NOMBRE_VALIDO = "Bob Esponja";
 	private static final String DNI_VALIDO = "11223344B";
 	private static final String TELEFONO_VALIDO = "950112233";
-	
+
 	private Cliente cliente;
-	
+
 	@BeforeEach
 	void init() {
 		cliente = new Cliente(NOMBRE_VALIDO, DNI_VALIDO, TELEFONO_VALIDO);
@@ -37,7 +37,7 @@ public class ClienteTest {
 		assertEquals(TELEFONO_VALIDO, cliente.getTelefono());
 		cliente = new Cliente("Bob", DNI_VALIDO, TELEFONO_VALIDO);
 	}
-	
+
 	@Test
 	void constructorNombreNoValidoDniValidoTelefonoValidoLanzaExcepcion() {
 		NullPointerException npe = assertThrows(NullPointerException.class, () -> new Cliente(null, DNI_VALIDO, TELEFONO_VALIDO));
@@ -53,7 +53,7 @@ public class ClienteTest {
 		iae = assertThrows(IllegalArgumentException.class, () -> new Cliente("Bob  Esponja", DNI_VALIDO, TELEFONO_VALIDO));
 		assertEquals(MENSAJE_ERROR_FORMATO_NOMBRE_NO_VALIDO, iae.getMessage());
 	}
-	
+
 	@Test
 	void constructorNombreValidoDniNoValidoTelefonoValidoLanzaExcepcion() {
 		NullPointerException npe = assertThrows(NullPointerException.class, () -> new Cliente(NOMBRE_VALIDO, null, TELEFONO_VALIDO));
@@ -63,7 +63,7 @@ public class ClienteTest {
 		iae = assertThrows(IllegalArgumentException.class, () -> new Cliente(NOMBRE_VALIDO, "12345678X", TELEFONO_VALIDO));
 		assertEquals(MENSAJE_ERROR_LETRA_DNI_NO_VALIDA, iae.getMessage());
 	}
-	
+
 	@Test
 	void constructorNombreValidoDniValidoTelefonoNoValidoLanzaExcepcion() {
 		NullPointerException npe = assertThrows(NullPointerException.class, () -> new Cliente(NOMBRE_VALIDO, DNI_VALIDO, null));
@@ -73,7 +73,7 @@ public class ClienteTest {
 		iae = assertThrows(IllegalArgumentException.class, () -> new Cliente(NOMBRE_VALIDO, DNI_VALIDO, "1234567890"));
 		assertEquals(MENSAJE_ERROR_FORMATO_TELEFONO_NO_VALIDO, iae.getMessage());
 	}
-	
+
 	@Test
 	void constrctorClienteValidoCopiaClienteCorrectamente() {
 		Cliente clienteCopia = new Cliente(cliente);
@@ -89,14 +89,14 @@ public class ClienteTest {
 		NullPointerException npe = assertThrows(NullPointerException.class, () -> new Cliente(null));
 		assertEquals(MENSAJE_ERROR_CLIENTE_NULO, npe.getMessage());
 	}
-	
+
 	@Test
 	void getClienteConDniValidoDevuelveClienteConDichoDni() {
 		Cliente cliente = Cliente.getClienteConDni(DNI_VALIDO);
 		assertEquals(DNI_VALIDO, cliente.getDni());
 	}
-	
-	@Test 
+
+	@Test
 	void getClienteConDniNoValidoLanzaExcepcion() {
 		NullPointerException npe = assertThrows(NullPointerException.class, () -> Cliente.getClienteConDni(null));
 		assertEquals(MENSAJE_ERROR_DNI_NULO, npe.getMessage());
@@ -105,7 +105,7 @@ public class ClienteTest {
 		iae = assertThrows(IllegalArgumentException.class, () -> Cliente.getClienteConDni("12345678X"));
 		assertEquals(MENSAJE_ERROR_LETRA_DNI_NO_VALIDA, iae.getMessage());
 	}
-	
+
 	@Test
 	void equalsYHasCodeConsistentes() {
 		Cliente cliente = new Cliente(NOMBRE_VALIDO, DNI_VALIDO, TELEFONO_VALIDO);
@@ -120,7 +120,7 @@ public class ClienteTest {
 		assertNotEquals(cliente.hashCode(), clienteDiferente.hashCode());
 		assertNotEquals(cliente, null);
 	}
-	
+
 	@Test
 	void toStringDevuelveLaCadenaEsperada() {
 		assertEquals(String.format("%s - %s (%s)", NOMBRE_VALIDO, DNI_VALIDO, TELEFONO_VALIDO), cliente.toString());

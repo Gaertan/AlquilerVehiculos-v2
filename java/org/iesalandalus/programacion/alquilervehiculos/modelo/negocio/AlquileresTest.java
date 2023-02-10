@@ -62,7 +62,7 @@ public class AlquileresTest {
 		turismo2 = mock();
 		when(turismo2.getMatricula()).thenReturn("1111BBB");
 	}
-	
+
 	@BeforeEach
 	void init() {
 		alquileres = new Alquileres();
@@ -89,7 +89,7 @@ public class AlquileresTest {
 		assertNotNull(alquileres);
 		assertEquals(0, alquileres.getCantidad());
 	}
-	
+
 	@Test
 	void getDevuelveAlquileresCorrectamente() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
@@ -103,7 +103,7 @@ public class AlquileresTest {
 		assertEquals(alquiler4, copiaAlquileres.get(1));
 		assertSame(alquiler4, copiaAlquileres.get(1));
 	}
-	
+
 	@Test
 	void getClienteValidoDevuelveAlquileresClienteCorrectamente() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
@@ -118,7 +118,7 @@ public class AlquileresTest {
 		assertEquals(alquiler2, alquileresCliente.get(1));
 		assertSame(alquiler2, alquileresCliente.get(1));
 	}
-	
+
 	@Test
 	void getTurismoValidoDevuelveAlquileresClienteCorrectamente() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
@@ -133,7 +133,7 @@ public class AlquileresTest {
 		assertEquals(alquiler4, alquileresTurismo.get(1));
 		assertSame(alquiler4,alquileresTurismo.get(1));
 	}
-	
+
 	@Test
 	void insertarAlquilerValidoInsertaCorrectamente() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
@@ -141,27 +141,27 @@ public class AlquileresTest {
 		assertEquals(alquiler1, alquileres.buscar(alquiler1));
 		assertSame(alquiler1, alquileres.buscar(alquiler1));
 	}
-	
+
 	@Test
 	void insertarAlquilerNuloLanzaExcepcion() {
 		NullPointerException npe = assertThrows(NullPointerException.class, () -> alquileres.insertar(null));
 		assertEquals(MENSAJE_ERROR_INSERTAR_ALQUILER_NULO, npe.getMessage());
 	}
-	
+
 	@Test
 	void insertarAlquilerClienteAlquilerAbiertoLanzaExcepcion() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
 		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> alquileres.insertar(alquiler2));
 		assertEquals(MENSAJE_ERROR_INSERTAR_ALQUILER_CLIENTE_ALQUILER_ABIERTO, onse.getMessage());
 	}
-	
+
 	@Test
 	void insertarAlquilerTurismoAlquilerAbiertoLanzaExcepcion() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
 		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> alquileres.insertar(alquiler4));
 		assertEquals(MENSAJE_ERROR_INSERTAR_ALQUILER_TURISMO_ALQUILADO, onse.getMessage());
 	}
-	
+
 	@Test
 	void insertarAlquilerClienteAlquilerAnteiorLanzaExcepcion() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
@@ -174,7 +174,7 @@ public class AlquileresTest {
 		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> alquileres.insertar(alquiler2));
 		assertEquals(MENSAJE_ERROR_INSERTAR_ALQUILER_CLIENTE_OTRO_POSTERIOR, onse.getMessage());
 	}
-	
+
 	@Test
 	void insertarAlquilerTurismoAlquilerAnteriorLanzaExcepcion() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
@@ -187,7 +187,7 @@ public class AlquileresTest {
 		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> alquileres.insertar(alquiler4));
 		assertEquals(MENSAJE_ERROR_INSERTAR_ALQUILER_TURISMO_OTRO_POSTERIOR, onse.getMessage());
 	}
-	
+
 	@Test
 	void devolverAlquilerValidoDevuelveCorrectamente() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
@@ -196,20 +196,20 @@ public class AlquileresTest {
 		Alquiler alquiler = alquileres.buscar(alquiler1);
 		assertEquals(ayer, alquiler.getFechaDevolucion());
 	}
-	
+
 	@Test
 	void devolverAlquilerNuloLanzaExcepcion() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
 		NullPointerException npe = assertThrows(NullPointerException.class, () -> alquileres.devolver(null, ayer));
 		assertEquals(MENSAJE_ERROR_DEVOLVER_ALQUILER_NULO, npe.getMessage());
 	}
-	
+
 	@Test
 	void devolverAlquilerNoExistenteLanzaExcepcion() {
 		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> alquileres.devolver(alquiler1, hoy));
 		assertEquals(MENSAJE_ERROR_ALQUILER_NO_EXISTE, onse.getMessage());
 	}
-	
+
 	@Test
 	void borrarAlquilerExistenteBorraAlquilerCorrectamente() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
@@ -217,7 +217,7 @@ public class AlquileresTest {
 		assertEquals(0, alquileres.getCantidad());
 		assertNull(alquileres.buscar(alquiler1));
 	}
-	
+
 	@Test
 	void borrarAlquilerNoExistenteLanzaExcepcion() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
@@ -233,19 +233,19 @@ public class AlquileresTest {
 		assertEquals(MENSAJE_ERROR_BORRAR_ALQUILER_NULO, npe.getMessage());
 		assertEquals(1, alquileres.getCantidad());
 	}
-	
+
 	@Test
 	void busarAlquilerExistenteDevuelveAlquilerCorrectamente() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
 		assertEquals(alquiler1, alquileres.buscar(alquiler1));
 		assertSame(alquiler1, alquileres.buscar(alquiler1));
 	}
-	
+
 	@Test
 	void busarAlquilerNoExistenteDevuelveAlquilerNulo() {
 		assertNull(alquileres.buscar(alquiler1));
 	}
-	
+
 	@Test
 	void buscarAlquilerNuloLanzaExcepcion() {
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));

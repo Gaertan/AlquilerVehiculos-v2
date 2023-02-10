@@ -7,11 +7,11 @@ import java.io.InputStreamReader;
 /**
  * Clase que nos permite leer datos por teclado asegurándose
  * que el tipo de dato introducido es compatible con el esperado.
- * 
+ *
  * @author José Ramón Jiménez Reyes
  */
 public class Entrada {
-	
+
 	/**
 	 * Constructor privado para evitar que java genere el suyo
 	 * por defecto y así evitar que se puedan instanciar objetos
@@ -19,7 +19,7 @@ public class Entrada {
 	private Entrada() {
 		// No se permiten instanciar objetos de esta clase
 	}
-	
+
 	/**
 	 * Método estático que lee una cadena por teclado
 	 * @return la cadena leída
@@ -54,7 +54,7 @@ public class Entrada {
             } while (!leido);
             return valor;
 	}
-	
+
 	/**
 	 * Método estático que lee un entero largo (long) por teclado y se asegura
 	 * que el valor introducido es compatible con un entero largo
@@ -73,7 +73,7 @@ public class Entrada {
             } while (!leido);
             return valor;
 	}
-	
+
 	/**
 	 * Método estático que lee un real (float) por teclado y se asegura
 	 * que el valor introducido es compatible con un real
@@ -92,10 +92,10 @@ public class Entrada {
             } while (!leido);
             return valor;
 	}
-	
+
 	/**
-	 * Método estático que lee un real de doble precisión (double) 
-	 * por teclado y se asegura que el valor introducido es compatible 
+	 * Método estático que lee un real de doble precisión (double)
+	 * por teclado y se asegura que el valor introducido es compatible
 	 * con un real de doble precisión
 	 * @return el real de doble precisión leído
 	 */
@@ -112,7 +112,7 @@ public class Entrada {
             } while (!leido);
             return valor;
 	}
-	
+
 	/**
 	 * Método estático que lee un caracter por teclado y se asegura
 	 * que el valor introducido es compatible con un caracter
@@ -125,7 +125,7 @@ public class Entrada {
                     valor = cadena();
                     if (valor.length() == 1)
                             leido = true;
-                    else 
+                    else
                             System.out.print("ERROR: Esperaba un caracter. Inténtalo de nuevo: ");
             } while (!leido);
             return valor.charAt(0);

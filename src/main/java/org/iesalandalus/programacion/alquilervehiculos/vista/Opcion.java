@@ -20,27 +20,28 @@ public enum Opcion {
 	LISTAR_ALQUILERES("Listar alquileres"){},
 	LISTAR_ALQUILERES_CLIENTES("Listar alquileres de clientes"){},
 	LISTAR_ALQUILERES_TURISMO("Listar alquileres de turismos"){};
-	
+
 	private String cadenaAmostrar;
-	
+
 	Opcion(String cadenaAmostrar){this.cadenaAmostrar=cadenaAmostrar;}
-	
+
 	private boolean esOrdinalValido(int ordinal) {
 		return(ordinal>=0&&ordinal<Opcion.values().length);
-		
+
 	}
-	
+
 	public Opcion get(int ordinal) throws OperationNotSupportedException {
 		if(esOrdinalValido(ordinal)) {return Opcion.values()[ordinal];}else throw new OperationNotSupportedException("No se encuentra el ordinal insertado(fuera de rango)");
 	}
-	
-	
-	
-	
-	
-	
-	
 
+
+
+
+
+
+
+
+	@Override
 	public String toString() {return this.cadenaAmostrar;}
-	
+
 }

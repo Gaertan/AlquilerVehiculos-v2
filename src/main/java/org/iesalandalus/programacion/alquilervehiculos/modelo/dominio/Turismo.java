@@ -55,8 +55,7 @@ public class Turismo {
 		if (matricula == null) {throw new NullPointerException("ERROR: La matrícula no puede ser nula.");}
 		matricula.replaceAll(" ", "");
 		matricula.toUpperCase();
-		if(matricula.isEmpty()) {throw new IllegalArgumentException("ERROR: La matrícula no tiene un formato válido.");}
-		if(!matricula.matches(ER_MATRICULA)) {throw new IllegalArgumentException("ERROR: La matrícula no tiene un formato válido.");}
+		if(matricula.isEmpty() || !matricula.matches(ER_MATRICULA)) {throw new IllegalArgumentException("ERROR: La matrícula no tiene un formato válido.");}
 		this.matricula=matricula;
 	}
 

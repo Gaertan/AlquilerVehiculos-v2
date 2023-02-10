@@ -34,11 +34,10 @@ public class Cliente {
 	}
 
 	public String getNombre() { String nombreR = this.nombre; return nombreR;}
-	
+
 	public void setNombre(String nombre){
 		if (nombre == null) {throw new NullPointerException("ERROR: El nombre no puede ser nulo.");}
-		if (nombre.trim().isEmpty()||nombre.matches("\\s+")) {throw new IllegalArgumentException("ERROR: El nombre no tiene un formato válido.");}
-		if (nombre.trim().matches(ER_NOMBRE)==false) {throw new IllegalArgumentException("ERROR: El nombre no tiene un formato válido.");}
+		if (nombre.trim().isEmpty()||nombre.matches("\\s+") || !nombre.trim().matches(ER_NOMBRE)) {throw new IllegalArgumentException("ERROR: El nombre no tiene un formato válido.");}
 		nombre = nombre.toLowerCase(Locale.ROOT);
 		//separa la string cuando encuentra cualquier tipo de espacio/separador
 
@@ -53,11 +52,11 @@ public class Cliente {
 				  if(palabra!=" ")nombreRoto[i] = palabra;}
 			  catch(Exception e) {}
 		  }
-		 
+
 
 		  //crea una nueva String uniendo los elementos de la arraay separados por un espacio
 		 String resultado = String.join(" ", nombreRoto);
-		 if (resultado.trim().matches(ER_NOMBRE)==false) {throw new IllegalArgumentException("ERROR: El nombre no tiene un formato válido.");}
+		 if (!resultado.trim().matches(ER_NOMBRE)) {throw new IllegalArgumentException("ERROR: El nombre no tiene un formato válido.");}
 
 		 this.nombre = resultado.trim();
 	}
@@ -68,8 +67,8 @@ public class Cliente {
 		String dni1 = dni;
 		dni1.replaceAll("\\W","");
 		dni1.toUpperCase();
-		if (dni1.matches(ER_DNI)==false) {throw new IllegalArgumentException("ERROR: El DNI no tiene un formato válido.");}
-		if(comprobarLetraDni(dni1)==false) {throw new IllegalArgumentException("ERROR: La letra del DNI no es correcta.");}
+		if (!dni1.matches(ER_DNI)) {throw new IllegalArgumentException("ERROR: El DNI no tiene un formato válido.");}
+		if(!comprobarLetraDni(dni1)) {throw new IllegalArgumentException("ERROR: La letra del DNI no es correcta.");}
 		this.dni = dni1;
 	}
 
@@ -88,14 +87,14 @@ public class Cliente {
 	public void setTelefono(String telefono){
 		if (telefono == null) {throw new NullPointerException("ERROR: El teléfono no puede ser nulo.");}
 		if (telefono.trim().isEmpty()) {throw new IllegalArgumentException("ERROR: El telefono de un cliente no puede estar vacío.");}
-		if (telefono.matches(ER_TELEFONO)==false) {throw new IllegalArgumentException("ERROR: El teléfono no tiene un formato válido.");}
+		if (!telefono.matches(ER_TELEFONO)) {throw new IllegalArgumentException("ERROR: El teléfono no tiene un formato válido.");}
 		this.telefono = telefono;
 	}
 
 	public static Cliente getClienteConDni(String dni){
 		if (dni == null) {throw new NullPointerException("ERROR: El DNI no puede ser nulo.");}
-		if (dni.matches(ER_DNI)==false) {throw new IllegalArgumentException("ERROR: El DNI no tiene un formato válido.");}
-		if(comprobarLetraDni(dni)==false) {throw new IllegalArgumentException("ERROR: La letra del DNI no es correcta.");}
+		if (!dni.matches(ER_DNI)) {throw new IllegalArgumentException("ERROR: El DNI no tiene un formato válido.");}
+		if(!comprobarLetraDni(dni)) {throw new IllegalArgumentException("ERROR: La letra del DNI no es correcta.");}
 		//no sabia si poner bob esponja como en los tests la verdad
 		Cliente clienteR = new Cliente("Andres Garcia Perez",dni,"666666666");
 		return	clienteR;

@@ -34,6 +34,7 @@ public class Alquiler {
 		setCliente( new Cliente (alquiler.getCliente() )  );
 		setTurismo( new Turismo (alquiler.getTurismo() )  );
 		setFechaAlquiler(alquiler.getFechaAlquiler());
+		setFechaDevolucion(alquiler.getFechaDevolucion());
 
 	}
 
