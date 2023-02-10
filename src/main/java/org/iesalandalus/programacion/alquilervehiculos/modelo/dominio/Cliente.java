@@ -5,9 +5,10 @@ import java.util.Objects;
 
 public class Cliente {
 
-	private final String ER_DNI = "\\d{8}[A-Za-z]";
-	private final String ER_TELEFONO = "[96]\\d{8}";
-	private final String ER_NOMBRE = "^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$";
+	private final static String ER_DNI = "\\d{8}[A-Za-z]";
+	private final static String ER_TELEFONO = "[96]\\d{8}";
+	private final static String ER_NOMBRE = "^[A-Z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\\.?)$";
+	//private final static String ER_NOMBRE = "^([A-ZÁÉÍÓÚ][a-zñáéíóú]+['\\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$";
 
 	private String nombre ;
 	private String dni ;
@@ -36,8 +37,8 @@ public class Cliente {
 	
 	public void setNombre(String nombre){
 		if (nombre == null) {throw new NullPointerException("ERROR: El nombre no puede ser nulo.");}
-		if (nombre.trim().isEmpty()||nombre.matches("\\s+")) {throw new IllegalArgumentException("ERROR: El nombre de un cliente no puede estar vacío.");}
-
+		if (nombre.trim().isEmpty()||nombre.matches("\\s+")) {throw new IllegalArgumentException("ERROR: El nombre no tiene un formato válido.");}
+		if (nombre.trim().matches(ER_NOMBRE)==false) {throw new IllegalArgumentException("ERROR: El nombre no tiene un formato válido.");}
 		nombre = nombre.toLowerCase(Locale.ROOT);
 		//separa la string cuando encuentra cualquier tipo de espacio/separador
 
@@ -72,7 +73,7 @@ public class Cliente {
 		this.dni = dni1;
 	}
 
-	private boolean comprobarLetraDni(String DNI){
+	private static boolean comprobarLetraDni(String DNI){
 		char tempLetraDNI = DNI.charAt(DNI.length()-1);
 		//elimina todo lo que sea un numero y convierte la caadena en uno.
 		String dniFixed = DNI.replaceAll("\\D","");
@@ -91,10 +92,10 @@ public class Cliente {
 		this.telefono = telefono;
 	}
 
-	public Cliente getClienteConDni(String dni){
-		if (dni == null) {throw new NullPointerException("ERROR: El dni de un cliente no puede ser nulo.");}
-		if (dni.matches(ER_DNI)==false) {throw new IllegalArgumentException("ERROR: El dni del cliente no tiene un formato válido.");}
-		if(comprobarLetraDni(dni)==false) {throw new IllegalArgumentException("ERROR: La letra del dni del cliente no es correcta.");}
+	public static Cliente getClienteConDni(String dni){
+		if (dni == null) {throw new NullPointerException("ERROR: El DNI no puede ser nulo.");}
+		if (dni.matches(ER_DNI)==false) {throw new IllegalArgumentException("ERROR: El DNI no tiene un formato válido.");}
+		if(comprobarLetraDni(dni)==false) {throw new IllegalArgumentException("ERROR: La letra del DNI no es correcta.");}
 		//no sabia si poner bob esponja como en los tests la verdad
 		Cliente clienteR = new Cliente("Andres Garcia Perez",dni,"666666666");
 		return	clienteR;
