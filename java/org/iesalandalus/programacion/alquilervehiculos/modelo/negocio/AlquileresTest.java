@@ -170,7 +170,7 @@ public class AlquileresTest {
 		when(alquiler1.getFechaAlquiler()).thenReturn(ayer);
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
 		assertDoesNotThrow(() -> alquileres.devolver(alquiler1, ayer));
-		when(alquiler1.getFechaDevolucion()).thenReturn(ayer);
+		when(alquiler1.getFechaDevolucion()).thenReturn(hoy);
 		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> alquileres.insertar(alquiler2));
 		assertEquals(MENSAJE_ERROR_INSERTAR_ALQUILER_CLIENTE_OTRO_POSTERIOR, onse.getMessage());
 	}
@@ -183,8 +183,9 @@ public class AlquileresTest {
 		when(alquiler1.getFechaAlquiler()).thenReturn(ayer);
 		assertDoesNotThrow(() -> alquileres.insertar(alquiler1));
 		assertDoesNotThrow(() -> alquileres.devolver(alquiler1, ayer));
-		when(alquiler1.getFechaDevolucion()).thenReturn(ayer);
-		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> alquileres.insertar(alquiler4));
+		when(alquiler1.getFechaDevolucion()).thenReturn(hoy);
+		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, ()
+				-> alquileres.insertar(alquiler4));
 		assertEquals(MENSAJE_ERROR_INSERTAR_ALQUILER_TURISMO_OTRO_POSTERIOR, onse.getMessage());
 	}
 

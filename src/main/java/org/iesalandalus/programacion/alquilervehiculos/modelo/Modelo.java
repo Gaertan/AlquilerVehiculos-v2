@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.alquilervehiculos.modelo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
@@ -11,6 +12,7 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Alquileres;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Clientes;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Turismos;
+
 
 public class Modelo {
 
@@ -67,19 +69,31 @@ public class Modelo {
 
 
 	//metodos buscar, comprueban si existe una entidad en las listas y devuelven una copia(o nulo si no)
-	public Cliente buscar(Cliente cliente)throws OperationNotSupportedException {Cliente clienteR = new Cliente(clientes.buscar(cliente));return clienteR;}
+	public Cliente buscar(Cliente cliente) {Cliente clienteR = new Cliente(clientes.buscar(cliente));return clienteR;}
 
-	public Turismo buscar(Turismo turismo) throws OperationNotSupportedException{Turismo turismoR = new Turismo(turismos.buscar(turismo));return turismoR;}
+	public Turismo buscar(Turismo turismo) {Turismo turismoR = new Turismo(turismos.buscar(turismo));return turismoR;}
 
-	public Alquiler buscar(Alquiler alquiler)throws OperationNotSupportedException {Alquiler alquilerR = new Alquiler(alquileres.buscar(alquiler));return alquilerR;}
+	public Alquiler buscar(Alquiler alquiler) {Alquiler alquilerR = new Alquiler(alquileres.buscar(alquiler));return alquilerR;}
 
 	public void modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException {clientes.modificar(cliente, nombre, telefono);}
 
-	public void devolver(Alquiler alquiler,	LocalDate fechaDevolucion) {alquileres.devolver(alquiler.getCliente(), fechaDevolucion);}
+	public void devolver(Alquiler alquiler,	LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException {
+		alquileres.devolver(alquiler, fechaDevolucion);
+		/*try {
+		alquileres.devolver(alquiler, fechaDevolucion);
+	} catch (NullPointerException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (OperationNotSupportedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	*/
+}
 
 
 
-	public void Borrar(Cliente cliente) throws OperationNotSupportedException {
+	public void borrar(Cliente cliente) throws OperationNotSupportedException {
 
 		//borramos todos los alquileres pertenecientes al cliente
 		for(Alquiler alq:getAlquileres(cliente)) {
@@ -92,7 +106,7 @@ public class Modelo {
 		}
 	}
 
-	public void Borrar(Turismo turismo) throws OperationNotSupportedException {		//borramos todos los alquileres pertenecientes al cliente
+	public void borrar(Turismo turismo) throws OperationNotSupportedException {		//borramos todos los alquileres pertenecientes al cliente
 		for(Alquiler alq:getAlquileres(turismo)) {
 			if(alq.getTurismo().equals(turismo)) {alquileres.borrar(alq);}
 
@@ -102,18 +116,63 @@ public class Modelo {
 
 		}}
 
-	public void Borrar(Alquiler alquiler) throws OperationNotSupportedException {alquileres.borrar(alquiler);}
+	public void borrar(Alquiler alquiler) throws OperationNotSupportedException {alquileres.borrar(alquiler);}
 
 
-	public List<Cliente> getClientes(){return clientes.get();}
+	public List<Cliente> getClientes( ){
 
-	public List<Turismo> getTurismos(){return turismos.get();}
+		List<Cliente> clientesR = new ArrayList<>();
+		for (Cliente cliente : clientes.get()) {
+			if (cliente != null ) {
+				clientesR.add	(new Cliente	(cliente));
+			}
+			}
+		return clientesR;	
+	
+	}
 
-	public List<Alquiler> getAlquileres(){return alquileres.get();}
+	public List<Turismo> getTurismos(){
 
-	public List<Alquiler> getAlquileres(Cliente cliente){return alquileres.get(cliente);}
+		List<Turismo> turismosR = new ArrayList<>();
+		for (Turismo turismo : turismos.get()) {
+			if (turismo != null ) {
+				turismosR.add	(new Turismo	(turismo));
+			}
+			}
+		return turismosR;}
 
-	public List<Alquiler> getAlquileres(Turismo turismo){return alquileres.get(turismo);}
+	public List<Alquiler> getAlquileres(){	
+			List<Alquiler> alquilerR = new ArrayList<>();
+		for (Alquiler alquiler : alquileres.get()) {
+			if (alquiler != null ) {
+				alquilerR.add	(new Alquiler	(alquiler));
+		}
+			}
+		return alquilerR;
+	}
+
+	public List<Alquiler> getAlquileres(Cliente cliente){
+		List<Alquiler> alquilerR = new ArrayList<>();
+	for (Alquiler alquiler : alquileres.get(cliente)) {
+		if (alquiler != null ) {
+			alquilerR.add	(new Alquiler	(alquiler));
+		}
+	}
+	return alquilerR;
+		
+		
+	}
+
+	public List<Alquiler> getAlquileres(Turismo turismo){	
+		List<Alquiler> alquilerR = new ArrayList<>();
+	for (Alquiler alquiler : alquileres.get(turismo)) {
+		if (alquiler != null ) {
+			alquilerR.add	(new Alquiler	(alquiler));
+		}
+	}
+	return alquilerR;
+		
+		}
 
 
 }

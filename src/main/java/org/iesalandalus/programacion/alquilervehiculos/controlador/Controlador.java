@@ -42,11 +42,11 @@ public class Controlador {
 
 	public void  devolver(Alquiler alquiler, LocalDate fechaDevolucion){modelo.devolver(alquiler, fechaDevolucion);}
 
-	public void  borrar(Cliente cliente) throws OperationNotSupportedException{modelo.Borrar(cliente);}
+	public void  borrar(Cliente cliente) throws OperationNotSupportedException{modelo.borrar(cliente);}
 
-	public void  borrar(Turismo turismo) throws OperationNotSupportedException{modelo.Borrar(turismo);}
+	public void  borrar(Turismo turismo) throws OperationNotSupportedException{modelo.borrar(turismo);}
 
-	public void  borrar(Alquiler alquiler) throws OperationNotSupportedException{modelo.Borrar(alquiler);}
+	public void  borrar(Alquiler alquiler) throws OperationNotSupportedException{modelo.borrar(alquiler);}
 
 	public List<Cliente> getClientes(){return modelo.getClientes();}
 

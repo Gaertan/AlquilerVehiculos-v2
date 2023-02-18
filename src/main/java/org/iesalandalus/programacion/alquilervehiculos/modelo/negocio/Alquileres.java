@@ -40,37 +40,30 @@ public class Alquileres {
 	public int getCantidad() {
 		try{int cantidad = coleccionAlquileres.size();return cantidad;}
 		catch(Exception e) {int cantidad=0;return cantidad;}}
-	//GOTTA DO THIS ONE
-	//GOTTA DO THIS ONE
-	//GOTTA DO THIS ONE
-	//GOTTA DO THIS ONE
-	//GOTTA DO THIS ONE
+
 	private boolean comprobarAlquiler(Cliente cliente,Turismo turismo,LocalDate fechaAlquiler) throws OperationNotSupportedException {
 		//como llevaba desde las 3 am haciendo cosas hice el codigo para insertarle alquiler como parametros,oops
 		//el codigo es optimizable/algo redundante por ello pero bueno, pasas que cosan
-		Alquiler alquiler = new Alquiler(cliente,turismo,fechaAlquiler);
 
 		boolean status = true;
-		Cliente clienteB = alquiler.getCliente();
-		Turismo turismoB = alquiler.getTurismo();
 
 		for (Alquiler alquilerB : coleccionAlquileres) {
 
-			if(clienteB.equals(alquilerB.getCliente())&&alquilerB.getFechaDevolucion()==null) {
+			if((cliente.equals(alquilerB.getCliente()))&&(alquilerB.getFechaDevolucion()==null)) {
 					status = false;throw new OperationNotSupportedException("ERROR: El cliente tiene otro alquiler sin devolver.");
 			}
 
-			if(turismoB.equals(alquilerB.getTurismo())&&alquilerB.getFechaDevolucion()==null) {
+			if((turismo.equals(alquilerB.getTurismo()))&&(alquilerB.getFechaDevolucion()==null)) {
 				status = false;throw new OperationNotSupportedException("ERROR: El turismo está actualmente alquilado.");
 			}
 
 
 
-			if(clienteB.equals(alquilerB.getCliente())&&alquilerB.getFechaDevolucion().isAfter(alquiler.getFechaDevolucion())) {
+			if(cliente.equals(alquilerB.getCliente())&&(alquilerB.getFechaDevolucion().isAfter(fechaAlquiler))) {
 					status = false;throw new OperationNotSupportedException("ERROR: El cliente tiene un alquiler posterior.");
 			}
 
-			if(turismoB.equals(alquilerB.getTurismo())&&alquilerB.getFechaDevolucion().isAfter(alquiler.getFechaDevolucion())) {
+			if(turismo.equals(alquilerB.getTurismo())&&alquilerB.getFechaDevolucion().isAfter(fechaAlquiler)) {
 					status = false;throw new OperationNotSupportedException("ERROR: El turismo tiene un alquiler posterior.");
 			}
 
@@ -79,17 +72,18 @@ public class Alquileres {
 
 		return status;}
 
-	public void insertar(Alquiler alquiler) {
+	public void insertar(Alquiler alquiler)throws OperationNotSupportedException , NullPointerException {
 		if(alquiler==null) {throw new NullPointerException("ERROR: No se puede insertar un alquiler nulo.");}
-		try {
+		/*try {
 			if(comprobarAlquiler(alquiler.getCliente(),alquiler.getTurismo(),alquiler.getFechaAlquiler())) {coleccionAlquileres.add(alquiler);}
 		} catch (OperationNotSupportedException e) {
 
 			e.getMessage();
-		}
+		}*/
+		if(comprobarAlquiler(alquiler.getCliente(),alquiler.getTurismo(),alquiler.getFechaAlquiler())) {coleccionAlquileres.add(alquiler);}
 	}
 
-	public void devolver(Cliente cliente,LocalDate fechaDevolucion) {
+/*	public void devolver(Cliente cliente,LocalDate fechaDevolucion) {
 		if(cliente==null||fechaDevolucion==null) {throw new NullPointerException("ERROR: No se puede devolver un alquiler nulo.");}
 
 		for (Alquiler alquilerB : coleccionAlquileres) {
@@ -99,6 +93,20 @@ public class Alquileres {
 				catch (OperationNotSupportedException e) {e.getMessage();}}
 
 		}
+	}*/
+	public void devolver(Alquiler alquiler,LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException{
+		if(alquiler==null||fechaDevolucion==null) {throw new NullPointerException("ERROR: No se puede devolver un alquiler nulo.");}
+		boolean status = false;
+		for (Alquiler alquilerB : coleccionAlquileres) {
+			
+
+			if(alquilerB.equals(alquiler)) {
+				/*try {alquilerB.devolver(fechaDevolucion);}
+				catch (OperationNotSupportedException e) {e.getMessage();}}*/
+				alquilerB.devolver(fechaDevolucion);}
+			status = true;
+		}
+		if (status == false) {throw new OperationNotSupportedException("ERROR: No existe ningún alquiler igual.");}
 	}
 
 	public Alquiler buscar(Alquiler alquiler) {

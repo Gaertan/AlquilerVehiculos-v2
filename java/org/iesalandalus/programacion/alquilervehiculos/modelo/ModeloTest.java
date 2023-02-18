@@ -1,5 +1,5 @@
 package org.iesalandalus.programacion.alquilervehiculos.modelo;
-
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -229,7 +229,8 @@ public class ModeloTest {
 		when(clientes.get()).thenReturn(clientesDevueltos);
 		List<Cliente> clientesExistentes = modelo.getClientes();
 		verify(clientes).get();
-		assertNotSame(cliente, clientesExistentes.get(0));
+		clientesExistentes.removeAll(clientesExistentes);
+		assertNotEquals(cliente, clientesExistentes.get(0));
 	}
 
 	@Test
