@@ -88,7 +88,7 @@ public class Consola {
 
 	public static Cliente leerClienteDni(){
 		 Cliente cliente = null;
-		 String nombre ="Andrés García Gaertan";
+		 String nombre ="Andres Gaertan";
 		 String telefono = "622099498";
 		 String dni;
 		 do {
@@ -107,7 +107,7 @@ public class Consola {
 
 	public static String leerNombre(){
 			String nombre;
-		do {System.out.print("Introduzca el nombre ; ");
+		do {System.out.print("Introduzca el nombre sin tildes/acentos ; ");
 			nombre = Entrada.cadena();}
 		while (nombre.equals(""));
 	return nombre;
@@ -141,7 +141,7 @@ public class Consola {
 			cilindrada = Entrada.entero();}
 			while (cilindrada<=0);
 
-			do {System.out.print("Introduzca la matricula (4 números y 3 letras) ; ");
+			do {System.out.print("Introduzca la matricula (4 números y 3 letras no vocales) ; ");
 			matricula = Entrada.cadena();}
 			while (matricula.equals(""));
 
@@ -186,9 +186,9 @@ public class Consola {
 		Alquiler alquiler = null;
 
 		do {
-				cliente = leerCliente();
-				turismo = leerTurismo();
-				fechaDate = leerFecha("A continuacion se le pide la fecha de alquiler");
+				cliente = leerClienteDni();
+				turismo = leerTurismoMatricula();
+				fechaDate = leerFecha("A continuacion se le pide la fecha de alquiler en formato dd/mm/aaaa");
 
 
 				try {Alquiler alquilerR = new Alquiler(cliente,turismo,fechaDate);alquiler=alquilerR;}
@@ -196,6 +196,7 @@ public class Consola {
 
 		}
 		while(alquiler == null);
+		
 		return alquiler;
 
 	}

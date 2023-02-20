@@ -48,7 +48,7 @@ public class Turismos {
 		}
 		Turismo turismoB = null;
 		if(coleccionTurismos.contains(turismo)) {
-			turismoB = new Turismo(coleccionTurismos.get(coleccionTurismos.indexOf(turismo)));}
+			turismoB =(coleccionTurismos.get(coleccionTurismos.indexOf(turismo)));}
 		return turismoB;}
 
 	public void borrar(Turismo turismo) throws OperationNotSupportedException {

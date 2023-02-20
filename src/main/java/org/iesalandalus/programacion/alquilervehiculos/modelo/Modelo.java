@@ -62,8 +62,18 @@ public class Modelo {
 
 		//busca que existan clientes o turismos ya insertados(metodos buscar) y crea un nuevo alquiler a partir de estos y la fecha del alquiler dado
 
-		Alquiler alquiler2 = new Alquiler(buscar(alquiler.getCliente()),buscar(alquiler.getTurismo()),alquiler.getFechaAlquiler());
-		alquileres.insertar(alquiler2);
+//		Alquiler alquiler2 = new Alquiler(buscar(alquiler.getCliente()),buscar(alquiler.getTurismo()),alquiler.getFechaAlquiler());
+		if(clientes.buscar(alquiler.getCliente())==null||turismos.buscar(alquiler.getTurismo())==null) {throw new OperationNotSupportedException("ERROR: No se encuentra el cliente o turismo");}
+		else { 
+			Alquiler alquilerI = new Alquiler(clientes.buscar(alquiler.getCliente()),turismos.buscar(alquiler.getTurismo()),alquiler.getFechaAlquiler());
+			
+			
+			alquileres.insertar(alquilerI);
+		
+		
+		
+		}
+		
 
 	}
 

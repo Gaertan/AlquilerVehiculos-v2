@@ -41,7 +41,7 @@ public class Clientes {
 			throw new NullPointerException("ERROR: No se puede buscar un cliente nulo.");
 		}
 		if(coleccionClientes.indexOf(cliente)!=-1) {
-			return new Cliente(coleccionClientes.get(coleccionClientes.indexOf(cliente)));
+			return(coleccionClientes.get(coleccionClientes.indexOf(cliente)));
 		}
 		else return null;
 	}

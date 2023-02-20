@@ -80,7 +80,13 @@ public class Alquileres {
 
 			e.getMessage();
 		}*/
-		if(comprobarAlquiler(alquiler.getCliente(),alquiler.getTurismo(),alquiler.getFechaAlquiler())) {coleccionAlquileres.add(alquiler);}
+		if(comprobarAlquiler(alquiler.getCliente(),alquiler.getTurismo(),alquiler.getFechaAlquiler())) {
+			
+			
+			coleccionAlquileres.add(new Alquiler(alquiler));
+			
+		
+		}
 	}
 
 /*	public void devolver(Cliente cliente,LocalDate fechaDevolucion) {

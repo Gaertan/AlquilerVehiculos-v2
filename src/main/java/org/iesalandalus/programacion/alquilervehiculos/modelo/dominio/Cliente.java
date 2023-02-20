@@ -7,7 +7,7 @@ public class Cliente {
 
 	private final static String ER_DNI = "\\d{8}[A-Za-z]";
 	private final static String ER_TELEFONO = "[96]\\d{8}";
-	private final static String ER_NOMBRE = "^[A-Z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\\.?)$";
+	private final static String ER_NOMBRE = "^[A-Z]([a-z]|[a-zñáéíóú])*(([,.] |[ '-])[A-Za-z][a-z]*)*(\\.?)$";
 	//private final static String ER_NOMBRE = "^([A-ZÁÉÍÓÚ][a-zñáéíóú]+['\\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$";
 
 	private String nombre ;
