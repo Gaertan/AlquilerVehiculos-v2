@@ -78,6 +78,7 @@ public class Modelo {
 	public void modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException {clientes.modificar(cliente, nombre, telefono);}
 
 	public void devolver(Alquiler alquiler,	LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException {
+		if(alquileres.buscar(alquiler)==null) {throw new OperationNotSupportedException("ERROR: No existe el alquiler a devolver.");}
 		alquileres.devolver(alquiler, fechaDevolucion);
 		/*try {
 		alquileres.devolver(alquiler, fechaDevolucion);

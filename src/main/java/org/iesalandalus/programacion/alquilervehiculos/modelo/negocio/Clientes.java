@@ -15,7 +15,8 @@ public class Clientes {
 	}
 
 	public List<Cliente>  get() {
-		return  coleccionClientes;
+		ArrayList<Cliente> clientesR = new ArrayList<>(coleccionClientes);
+		return clientesR ;
 	}
 
 	public int getCantidad() {
@@ -23,7 +24,7 @@ public class Clientes {
 		try{return coleccionClientes.size();}
 		catch(Exception e) {
 			int cantidad = 0;
-			return  cantidad = 0;}
+			return  cantidad;}
 	}
 
 	public void insertar(Cliente cliente) throws OperationNotSupportedException {
@@ -60,11 +61,16 @@ public class Clientes {
 		if (cliente == null) {
 			throw new NullPointerException("ERROR: No se puede modificar un cliente nulo.");
 		}
+		
 
 		if(coleccionClientes.contains(cliente)) {
 			try {
-				Cliente clienteInsert = new Cliente(nombre,cliente.getDni(),telefono);
-				coleccionClientes.set(coleccionClientes.indexOf(cliente), clienteInsert);
+				if(nombre==null||nombre.trim() ==null||nombre=="") {nombre = cliente.getNombre();}
+				if(telefono==null||telefono.trim()==null||telefono=="") {telefono = cliente.getTelefono();}
+		/*		Cliente clienteInsert = new Cliente(nombre,cliente.getDni(),telefono);
+				coleccionClientes.set(coleccionClientes.indexOf(cliente), clienteInsert);*/
+			coleccionClientes.get(coleccionClientes.indexOf(cliente)).setNombre(nombre);
+			coleccionClientes.get(coleccionClientes.indexOf(cliente)).setTelefono(telefono);
 			} catch (Exception e) {System.out.println("ERROR: No se pudo insertar el cliente");}
 
 		}

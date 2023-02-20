@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 
 
@@ -17,7 +18,10 @@ public class Turismos {
 
 	public Turismos() {coleccionTurismos = new ArrayList<>();}
 
-	public List<Turismo> get(){return coleccionTurismos;}
+	public List<Turismo> get(){
+		ArrayList<Turismo> turismosR = new ArrayList<>(coleccionTurismos);
+		return turismosR;
+		}
 
 	public int getCantidad() {
 		int cantidad = 0;

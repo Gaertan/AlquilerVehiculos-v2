@@ -40,7 +40,15 @@ public class Controlador {
 
 	public void  modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException{modelo.modificar(cliente, nombre, telefono);}
 
-	public void  devolver(Alquiler alquiler, LocalDate fechaDevolucion){modelo.devolver(alquiler, fechaDevolucion);}
+	public void  devolver(Alquiler alquiler, LocalDate fechaDevolucion){try {
+		modelo.devolver(alquiler, fechaDevolucion);
+	} catch (NullPointerException e) {
+		// TODO Auto-generated catch block
+		System.out.println(e.getMessage());
+	} catch (OperationNotSupportedException e) {
+		// TODO Auto-generated catch block
+		System.out.println(e.getMessage());
+	}}
 
 	public void  borrar(Cliente cliente) throws OperationNotSupportedException{modelo.borrar(cliente);}
 
