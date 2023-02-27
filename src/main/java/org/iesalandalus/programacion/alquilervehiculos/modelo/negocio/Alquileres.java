@@ -7,7 +7,7 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 
 public class Alquileres {
 
@@ -27,7 +27,7 @@ public class Alquileres {
 		return coleccionCliente;
 		}
 
-	public List<Alquiler> get(Turismo turismo){
+	public List<Alquiler> get(Vehiculo turismo){
 		if(turismo==null) {throw new NullPointerException("ERROR: No se puede buscar un turismo nulo.");}
 		List<Alquiler> coleccionTurismo = new ArrayList<>() ;
 		for (Alquiler alquiler : coleccionAlquileres) {
@@ -41,7 +41,7 @@ public class Alquileres {
 		try{int cantidad = coleccionAlquileres.size();return cantidad;}
 		catch(Exception e) {int cantidad=0;return cantidad;}}
 
-	private boolean comprobarAlquiler(Cliente cliente,Turismo turismo,LocalDate fechaAlquiler) throws OperationNotSupportedException {
+	private boolean comprobarAlquiler(Cliente cliente,Vehiculo turismo,LocalDate fechaAlquiler) throws OperationNotSupportedException {
 		//como llevaba desde las 3 am haciendo cosas hice el codigo para insertarle alquiler como parametros,oops
 		//el codigo es optimizable/algo redundante por ello pero bueno, pasas que cosan
 

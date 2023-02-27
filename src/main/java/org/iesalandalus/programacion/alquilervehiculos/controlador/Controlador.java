@@ -9,6 +9,7 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.Modelo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.vista.Vista;
 
 public class Controlador {
@@ -34,7 +35,7 @@ public class Controlador {
 
 	public Cliente buscar(Cliente cliente) throws OperationNotSupportedException{return modelo.buscar(cliente);}
 
-	public Turismo buscar(Turismo turismo) throws OperationNotSupportedException{return modelo.buscar(turismo);}
+	public Vehiculo buscar(Vehiculo turismo) throws OperationNotSupportedException{return modelo.buscar(turismo);}
 
 	public Alquiler buscar(Alquiler alquiler) throws OperationNotSupportedException{return modelo.buscar(alquiler);}
 
@@ -52,7 +53,7 @@ public class Controlador {
 
 	public void  borrar(Cliente cliente) throws OperationNotSupportedException{modelo.borrar(cliente);}
 
-	public void  borrar(Turismo turismo) throws OperationNotSupportedException{modelo.borrar(turismo);}
+	public void  borrar(Vehiculo turismo) throws OperationNotSupportedException{modelo.borrar(turismo);}
 
 	public void  borrar(Alquiler alquiler) throws OperationNotSupportedException{modelo.borrar(alquiler);}
 
@@ -64,7 +65,7 @@ public class Controlador {
 
 	public List<Alquiler> getAlquileres(Cliente cliente){return modelo.getAlquileres(cliente);}
 
-	public List<Alquiler> getAlquileres(Turismo turismo){return modelo.getAlquileres(turismo);}
+	public List<Alquiler> getAlquileres(Vehiculo turismo){return modelo.getAlquileres(turismo);}
 
 
 

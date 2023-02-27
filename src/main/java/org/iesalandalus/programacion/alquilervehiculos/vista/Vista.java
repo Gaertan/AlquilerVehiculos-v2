@@ -8,6 +8,7 @@ import org.iesalandalus.programacion.alquilervehiculos.controlador.Controlador;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 
 public class Vista {
 
@@ -135,7 +136,7 @@ public class Vista {
 
 	private void buscarTurismo() {
 		Consola.mostrarCabecera("Opcion buscar turismo");
-		Turismo turismo = Consola.leerTurismoMatricula();
+		Vehiculo turismo = Consola.leerTurismoMatricula();
 		try{turismo = controlador.buscar(turismo);System.out.println(turismo); }catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
@@ -170,7 +171,7 @@ public class Vista {
 
 	private void borrarTurismo() {
 		Consola.mostrarCabecera("Opcion borrar turismo");
-		Turismo turismo = Consola.leerTurismoMatricula();
+		Vehiculo turismo = Consola.leerTurismoMatricula();
 		try{controlador.borrar(turismo);}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
@@ -208,7 +209,7 @@ public class Vista {
 
 	private void listarAlquileresTurismo() {
 		Consola.mostrarCabecera("Opcion listar alquileres de un turismo");
-		Turismo turismo = Consola.leerTurismoMatricula();
+		Vehiculo turismo = Consola.leerTurismoMatricula();
 		try{System.out.println(controlador.getAlquileres(turismo));}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 

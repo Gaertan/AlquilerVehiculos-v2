@@ -63,7 +63,7 @@ public class AlquilerTest {
 		when(turismo.getCilindrada()).thenReturn(90);
 	}
 
-	private void setComportamiento(Turismo turismo, String matricula) {
+	private void setComportamiento(Vehiculo turismo, String matricula) {
 		when(turismo.getMatricula()).thenReturn(matricula);
 	}
 

@@ -9,16 +9,17 @@ import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Alquileres;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Clientes;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Turismos;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Vehiculos;
 
 
 public class Modelo {
 
 	private Alquileres alquileres;
 	private Clientes clientes;
-	private Turismos turismos;
+	private Vehiculos vehiculos;
 
 	public Modelo(){
 		comenzar();
@@ -27,7 +28,7 @@ public class Modelo {
 	public void comenzar(){
 		alquileres = new Alquileres() ;
 		clientes = new Clientes() ;
-		turismos = new Turismos() ;
+		vehiculos = new Vehiculos() ;
 	}
 
 	public void terminar() {System.out.println("la ejecucion del modelo ha terminado");}
@@ -50,22 +51,22 @@ public class Modelo {
 	/*	if(turismo==null) {throw new NullPointerException("ERROR: No existe el turismo del alquiler.");}
 		Turismo turismo2 = new Turismo(turismo);
 		try {
-			turismos.insertar(turismo2);
+			vehiculos.insertar(turismo2);
 		} catch (OperationNotSupportedException e) {e.getMessage();}*/
 		Turismo turismo2 = new Turismo(turismo);
-		turismos.insertar(turismo2);
+		vehiculos.insertar(turismo2);
 	}
 	public void insertar(Alquiler alquiler) throws OperationNotSupportedException{/*
 		if(alquiler==null) {throw new NullPointerException("ERROR: No se puede realizar un alquiler nulo.");}
 		Alquiler alquiler2 = new Alquiler(alquileres.buscar(alquiler));
 		try{alquileres.insertar(alquiler2);}catch(Exception e)	{e.getMessage();}*/
 
-		//busca que existan clientes o turismos ya insertados(metodos buscar) y crea un nuevo alquiler a partir de estos y la fecha del alquiler dado
+		//busca que existan clientes o vehiculos ya insertados(metodos buscar) y crea un nuevo alquiler a partir de estos y la fecha del alquiler dado
 
 //		Alquiler alquiler2 = new Alquiler(buscar(alquiler.getCliente()),buscar(alquiler.getTurismo()),alquiler.getFechaAlquiler());
-		if(clientes.buscar(alquiler.getCliente())==null||turismos.buscar(alquiler.getTurismo())==null) {throw new OperationNotSupportedException("ERROR: No se encuentra el cliente o turismo");}
+		if(clientes.buscar(alquiler.getCliente())==null||vehiculos.buscar(alquiler.getTurismo())==null) {throw new OperationNotSupportedException("ERROR: No se encuentra el cliente o turismo");}
 		else { 
-			Alquiler alquilerI = new Alquiler(clientes.buscar(alquiler.getCliente()),turismos.buscar(alquiler.getTurismo()),alquiler.getFechaAlquiler());
+			Alquiler alquilerI = new Alquiler(clientes.buscar(alquiler.getCliente()),vehiculos.buscar(alquiler.getTurismo()),alquiler.getFechaAlquiler());
 			
 			
 			alquileres.insertar(alquilerI);
@@ -81,7 +82,7 @@ public class Modelo {
 	//metodos buscar, comprueban si existe una entidad en las listas y devuelven una copia(o nulo si no)
 	public Cliente buscar(Cliente cliente) {Cliente clienteR = new Cliente(clientes.buscar(cliente));return clienteR;}
 
-	public Turismo buscar(Turismo turismo) {Turismo turismoR = new Turismo(turismos.buscar(turismo));return turismoR;}
+	public Vehiculo buscar(Vehiculo turismo) {Vehiculo turismoR = new Turismo(vehiculos.buscar(turismo));return turismoR;}
 
 	public Alquiler buscar(Alquiler alquiler) {Alquiler alquilerR = new Alquiler(alquileres.buscar(alquiler));return alquilerR;}
 
@@ -117,13 +118,13 @@ public class Modelo {
 		}
 	}
 
-	public void borrar(Turismo turismo) throws OperationNotSupportedException {		//borramos todos los alquileres pertenecientes al cliente
+	public void borrar(Vehiculo turismo) throws OperationNotSupportedException {		//borramos todos los alquileres pertenecientes al cliente
 		for(Alquiler alq:getAlquileres(turismo)) {
 			if(alq.getTurismo().equals(turismo)) {alquileres.borrar(alq);}
 
 		}
-		for(Turismo turi:getTurismos()) {
-			if(turi.equals(turismo)) {turismos.borrar(turismo);}
+		for(Vehiculo turi:getTurismos()) {
+			if(turi.equals(turismo)) {vehiculos.borrar(turismo);}
 
 		}}
 
@@ -145,7 +146,7 @@ public class Modelo {
 	public List<Turismo> getTurismos(){
 
 		List<Turismo> turismosR = new ArrayList<>();
-		for (Turismo turismo : turismos.get()) {
+		for (Turismo turismo : vehiculos.get()) {
 			if (turismo != null ) {
 				turismosR.add	(new Turismo	(turismo));
 			}
@@ -174,7 +175,7 @@ public class Modelo {
 		
 	}
 
-	public List<Alquiler> getAlquileres(Turismo turismo){	
+	public List<Alquiler> getAlquileres(Vehiculo turismo){	
 		List<Alquiler> alquilerR = new ArrayList<>();
 	for (Alquiler alquiler : alquileres.get(turismo)) {
 		if (alquiler != null ) {
