@@ -3,7 +3,7 @@ package org.iesalandalus.programacion.alquilervehiculos.modelo.dominio;
 import java.util.Locale;
 import java.util.Objects;
 
-public class Cliente {
+public class Cliente implements Comparable<Cliente>{
 
 	private final static String ER_DNI = "\\d{8}[A-Za-z]";
 	private final static String ER_TELEFONO = "[96]\\d{8}";
@@ -120,6 +120,22 @@ public class Cliente {
 
 	@Override
 	public String toString() {return (String.format("%s - %s (%s)", nombre, dni, telefono) ) ;}
+	
+    @Override
+    public int compareTo(Cliente cliente) {
+       String a=new String( this.getNombre()); 
+       String b=new String( cliente.getNombre());
+       int compara = a.compareTo(b);
+	       if(compara==0) {
+	    	   String c=new String( String.valueOf(this.getDni())); 
+	           String d=new String( String.valueOf(cliente.getDni())); 
+	    	   compara = c.compareTo(d);
+	    	   
+	       }
+       return compara;
+       
+       
+   }
 
 
 }

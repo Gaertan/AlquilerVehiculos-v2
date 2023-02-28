@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import javax.naming.OperationNotSupportedException;
 
-public class Alquiler {
+public class Alquiler implements Comparable<Alquiler>{
 
 
 	private Cliente cliente;
@@ -127,6 +127,16 @@ public class Alquiler {
 					FORMATO_FECHA.format(fechaAlquiler), FORMATO_FECHA.format(fechaDevolucion), 29);
 		}
 
+	}
+
+
+	@Override
+	public int compareTo(Alquiler alquiler) {
+	
+		int compara = getFechaAlquiler().compareTo(alquiler.getFechaAlquiler());
+		if(compara==0) {compara = getCliente().compareTo(alquiler.getCliente());}
+		return compara;
+		
 	}
 
 

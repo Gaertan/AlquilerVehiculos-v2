@@ -1,6 +1,9 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -9,6 +12,7 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IClientes;
 
 public class Vista {
 
@@ -185,32 +189,83 @@ public class Vista {
 	private void listarCliente() {
 		Consola.mostrarCabecera("Opcion listar clientes");
 		//Cliente cliente = Consola.leerCliente();
-		try{System.out.println(controlador.getClientes());}catch(Exception e) {System.out.println(e.getMessage());}
+		
+		
+		
+		List<Cliente> clientes = controlador.getClientes();	
+		Collections.sort(clientes);
+		Iterator<Cliente> itListaClientes=clientes.iterator();
+
+        while (itListaClientes.hasNext()) {
+            Cliente cliente=itListaClientes.next();
+            System.out.println(cliente); }
+		
+		//try{System.out.println(controlador.getClientes());}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
 	private void listarTurismo() {
 		Consola.mostrarCabecera("Opcion listar todos los turismos");
 		//Turismo turismo = Consola.leerTurismo();
-		try{System.out.println(controlador.getVehiculos());}catch(Exception e) {System.out.println(e.getMessage());}
+		
+		List<Vehiculo> vehiculos = controlador.getVehiculos();
+		Collections.sort(vehiculos);
+		Iterator<Vehiculo> itListaVehiculos=vehiculos.iterator();
+
+        while (itListaVehiculos.hasNext()) {
+            Vehiculo vehiculo=itListaVehiculos.next();
+            System.out.println(vehiculo); }
+		
+		
+		//try{System.out.println(controlador.getVehiculos());}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
 	private void listarAlquiler() {
 		Consola.mostrarCabecera("Opcion listar alquileres");
-		//Alquiler alquiler = Consola.leerAlquiler();
-		try{System.out.println(controlador.getAlquileres());}catch(Exception e) {System.out.println(e.getMessage());}
+
+		List<Alquiler> alquileres = controlador.getAlquileres();
+		Collections.sort(alquileres);
+		Iterator<Alquiler> itListaAlquileres=alquileres.iterator();
+
+        while (itListaAlquileres.hasNext()) {
+        	Alquiler alquiler=itListaAlquileres.next();
+            System.out.println(alquiler); }
+		
+		
+		//try{System.out.println(controlador.getAlquileres());}catch(Exception e) {System.out.println(e.getMessage());}
 
 	}
 
 	private void listarAlquileresCliente() {
 		Consola.mostrarCabecera("Opcion listar alquileres de un cliente");
 		Cliente cliente = Consola.leerClienteDni();
-		try{System.out.println(controlador.getAlquileres(cliente));}catch(Exception e) {System.out.println(e.getMessage());}
+		
+
+		List<Alquiler> alquileres = controlador.getAlquileres(cliente);
+		Collections.sort(alquileres);
+		Iterator<Alquiler> itListaAlquileres=alquileres.iterator();
+
+        while (itListaAlquileres.hasNext()) {
+        	Alquiler alquiler=itListaAlquileres.next();
+            System.out.println(alquiler); }
+		
+	//	try{System.out.println(controlador.getAlquileres(cliente));}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
 	private void listarAlquileresTurismo() {
 		Consola.mostrarCabecera("Opcion listar alquileres de un turismo");
 		Vehiculo turismo = Consola.leerTurismoMatricula();
-		try{System.out.println(controlador.getAlquileres(turismo));}catch(Exception e) {System.out.println(e.getMessage());}
+		
+
+		List<Alquiler> alquileres = controlador.getAlquileres(turismo);
+		Collections.sort(alquileres);
+		Iterator<Alquiler> itListaAlquileres=alquileres.iterator();
+
+        while (itListaAlquileres.hasNext()) {
+        	Alquiler alquiler=itListaAlquileres.next();
+            System.out.println(alquiler); }
+        
+        
+		//try{System.out.println(controlador.getAlquileres(turismo));}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
 

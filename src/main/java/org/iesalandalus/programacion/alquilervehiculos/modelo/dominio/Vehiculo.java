@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import javax.naming.OperationNotSupportedException;
 
-public abstract class Vehiculo {
+public abstract class Vehiculo implements Comparable<Vehiculo>{
 
 	private static final String ER_MARCA = "[A-Z][a-z]*(-|\\s|)?[a-zA-ZáéíóúüñÁÉÍÓÚÑ]+";
 	private static final String ER_MATRICULA = "\\d{4}\s{0,1}([B-D]|[F-H]|[J-N]|[P-T]|[V-Z]){3}";
@@ -81,5 +81,16 @@ public abstract class Vehiculo {
 		Vehiculo other = (Vehiculo) obj;
 		return Objects.equals(matricula, other.matricula);
 	}
+	
+    @Override
+    public int compareTo(Vehiculo vehiculo) {
+       String a=new String( this.getMarca()+this.getModelo()+this.getMatricula()); 
+       String b=new String(vehiculo.getMarca()+vehiculo.getModelo()+vehiculo.getMatricula());
+       int compara = a.compareTo(b);
+
+       return compara;
+       
+       
+   }
 
 }
