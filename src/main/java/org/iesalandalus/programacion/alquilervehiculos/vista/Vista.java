@@ -25,7 +25,7 @@ public class Vista {
 		Opcion opcion = null;
 
 		do {
-			
+
 		while (opcion==null) {
 			Consola.mostrarMenu();
 			try {opcion = Consola.elegirOpcion();} catch (OperationNotSupportedException e){e.getMessage();}
@@ -191,7 +191,7 @@ public class Vista {
 	private void listarTurismo() {
 		Consola.mostrarCabecera("Opcion listar todos los turismos");
 		//Turismo turismo = Consola.leerTurismo();
-		try{System.out.println(controlador.getTurismos());}catch(Exception e) {System.out.println(e.getMessage());}
+		try{System.out.println(controlador.getVehiculos());}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
 	private void listarAlquiler() {

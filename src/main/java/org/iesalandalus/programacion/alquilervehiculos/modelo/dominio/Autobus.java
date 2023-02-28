@@ -4,14 +4,14 @@ package org.iesalandalus.programacion.alquilervehiculos.modelo.dominio;
 public class Autobus extends Vehiculo {
 	private final int FACTOR_PLAZAS = 2;
 	private int plazas;
-	
-	
+
+
 	public Autobus(String marca, String modelo, int plazas, String matricula) {
 
 		super( marca,  modelo,  matricula);
 
 		setPlazas(plazas);
-		
+
 	}
 
 	public Autobus(Autobus autobus) {
@@ -32,7 +32,7 @@ public class Autobus extends Vehiculo {
 	}
 
 	public int getPlazas() {return this.plazas;}
-	
+
 	public static Vehiculo getAutobusConMatricula(String matricula){
 		if (matricula==null) if (matricula == null) {throw new NullPointerException("ERROR: La matrícula no puede ser nula.");}
 		return new Autobus("Seat","Leon",5,matricula);

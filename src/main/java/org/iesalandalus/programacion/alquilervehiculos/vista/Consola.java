@@ -196,7 +196,7 @@ public class Consola {
 
 		}
 		while(alquiler == null);
-		
+
 		return alquiler;
 
 	}

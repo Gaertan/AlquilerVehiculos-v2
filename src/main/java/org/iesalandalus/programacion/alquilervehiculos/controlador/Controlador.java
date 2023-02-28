@@ -8,41 +8,40 @@ import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.Modelo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.vista.Vista;
 
 public class Controlador {
 
 	private Vista vista;
-	private Modelo modelo;
-	public Controlador(Modelo modelo, Vista vista){
-		if(modelo!=null&&vista!=null) {this.modelo=modelo;this.vista=vista;}vista.setControlador(this);}
+	private Modelo modeloCascada;
+	public Controlador(Modelo modeloCascada, Vista vista){
+		if(modeloCascada!=null&&vista!=null) {this.modeloCascada=modeloCascada;this.vista=vista;}vista.setControlador(this);}
 
 
 
 
 
-	public void  comenzar(){modelo.comenzar();vista.comenzar();}
+	public void  comenzar(){modeloCascada.comenzar();vista.comenzar();}
 
-	public void  terminar(){modelo.terminar();vista.terminar();}
+	public void  terminar(){modeloCascada.terminar();vista.terminar();}
 
-	public void  insertar(Cliente cliente) throws OperationNotSupportedException{modelo.insertar(cliente);}
+	public void  insertar(Cliente cliente) throws OperationNotSupportedException{modeloCascada.insertar(cliente);}
 
-	public void insertar(Turismo turismo) throws OperationNotSupportedException{modelo.insertar(turismo);}
+	public void insertar(Vehiculo vehiculo) throws OperationNotSupportedException{modeloCascada.insertar(vehiculo);}
 
-	public void  insertar(Alquiler alquiler) throws OperationNotSupportedException{modelo.insertar(alquiler);}
+	public void  insertar(Alquiler alquiler) throws OperationNotSupportedException{modeloCascada.insertar(alquiler);}
 
-	public Cliente buscar(Cliente cliente) throws OperationNotSupportedException{return modelo.buscar(cliente);}
+	public Cliente buscar(Cliente cliente) throws OperationNotSupportedException{return modeloCascada.buscar(cliente);}
 
-	public Vehiculo buscar(Vehiculo turismo) throws OperationNotSupportedException{return modelo.buscar(turismo);}
+	public Vehiculo buscar(Vehiculo vehiculo) throws OperationNotSupportedException{return modeloCascada.buscar(vehiculo);}
 
-	public Alquiler buscar(Alquiler alquiler) throws OperationNotSupportedException{return modelo.buscar(alquiler);}
+	public Alquiler buscar(Alquiler alquiler) throws OperationNotSupportedException{return modeloCascada.buscar(alquiler);}
 
-	public void  modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException{modelo.modificar(cliente, nombre, telefono);}
+	public void  modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException{modeloCascada.modificar(cliente, nombre, telefono);}
 
 	public void  devolver(Alquiler alquiler, LocalDate fechaDevolucion){try {
-		modelo.devolver(alquiler, fechaDevolucion);
+		modeloCascada.devolver(alquiler, fechaDevolucion);
 	} catch (NullPointerException e) {
 		// TODO Auto-generated catch block
 		System.out.println(e.getMessage());
@@ -51,21 +50,21 @@ public class Controlador {
 		System.out.println(e.getMessage());
 	}}
 
-	public void  borrar(Cliente cliente) throws OperationNotSupportedException{modelo.borrar(cliente);}
+	public void  borrar(Cliente cliente) throws OperationNotSupportedException{modeloCascada.borrar(cliente);}
 
-	public void  borrar(Vehiculo turismo) throws OperationNotSupportedException{modelo.borrar(turismo);}
+	public void  borrar(Vehiculo vehiculo) throws OperationNotSupportedException{modeloCascada.borrar(vehiculo);}
 
-	public void  borrar(Alquiler alquiler) throws OperationNotSupportedException{modelo.borrar(alquiler);}
+	public void  borrar(Alquiler alquiler) throws OperationNotSupportedException{modeloCascada.borrar(alquiler);}
 
-	public List<Cliente> getClientes(){return modelo.getClientes();}
+	public List<Cliente> getClientes(){return modeloCascada.getClientes();}
 
-	public List<Turismo> getTurismos(){return modelo.getTurismos();}
+	public List<Vehiculo> getVehiculos(){return modeloCascada.getVehiculos();}
 
-	public List<Alquiler> getAlquileres(){return modelo.getAlquileres();}
+	public List<Alquiler> getAlquileres(){return modeloCascada.getAlquileres();}
 
-	public List<Alquiler> getAlquileres(Cliente cliente){return modelo.getAlquileres(cliente);}
+	public List<Alquiler> getAlquileres(Cliente cliente){return modeloCascada.getAlquileres(cliente);}
 
-	public List<Alquiler> getAlquileres(Vehiculo turismo){return modelo.getAlquileres(turismo);}
+	public List<Alquiler> getAlquileres(Vehiculo vehiculo){return modeloCascada.getAlquileres(vehiculo);}
 
 
 

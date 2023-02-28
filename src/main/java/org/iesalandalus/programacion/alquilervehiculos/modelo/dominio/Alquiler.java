@@ -32,7 +32,7 @@ public class Alquiler {
 	public Alquiler(Alquiler alquiler) {
 		if (alquiler == null) {throw new NullPointerException("ERROR: No es posible copiar un alquiler nulo.");}
 		setCliente((alquiler.getCliente() )  );
-		setTurismo((alquiler.getTurismo() )  );
+		setTurismo((alquiler.getVehiculo() )  );
 		setFechaAlquiler(alquiler.getFechaAlquiler());
 		if(alquiler.getFechaDevolucion()==null) {this.fechaDevolucion=null;}else {setFechaDevolucion(alquiler.getFechaDevolucion());}
 
@@ -50,7 +50,7 @@ public class Alquiler {
 	}
 
 
-	public Vehiculo getTurismo() {
+	public Vehiculo getVehiculo() {
 		return vehiculo;
 	}
 

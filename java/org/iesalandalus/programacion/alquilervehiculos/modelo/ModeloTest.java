@@ -21,9 +21,12 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Alquileres;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Clientes;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Vehiculos;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IAlquileres;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IClientes;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IVehiculos;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Alquileres;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Clientes;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Vehiculos;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,14 +43,14 @@ public class ModeloTest {
 	private static final String MENSAJE_ERROR_DEVOLVER_ALQUILER_NO_EXISTE = "ERROR: No existe el alquiler a devolver.";
 
 	@InjectMocks
-	private Modelo modelo;
+	private Modelo modeloCascada;
 
 	@Mock
-	private static Clientes clientes;
+	private static IClientes clientes;
 	@Mock
-	private static Vehiculos vehiculos;
+	private static IVehiculos vehiculos;
 	@Mock
-	private static Alquileres alquileres;
+	private static IAlquileres alquileres;
 
 	private static Cliente cliente;
 	private static Turismo turismo;
@@ -85,21 +88,21 @@ public class ModeloTest {
 
 	@Test
 	void terminarNoHaceNada() {
-		assertDoesNotThrow(() -> modelo.terminar());
+		assertDoesNotThrow(() -> modeloCascada.terminar());
 	}
 
 	@Test
 	void insertarClienteLlamaClientesInsertar() {
-		assertDoesNotThrow(() -> modelo.insertar(cliente));
+		assertDoesNotThrow(() -> modeloCascada.insertar(cliente));
 		assertDoesNotThrow(() -> verify(clientes).insertar(any(Cliente.class)));
-		assertNotSame(cliente, modelo.buscar(cliente));
+		assertNotSame(cliente, modeloCascada.buscar(cliente));
 	}
 
 	@Test
 	void insertarTurismoLlamaTurismosInsertar() {
-		assertDoesNotThrow(() -> modelo.insertar(turismo));
+		assertDoesNotThrow(() -> modeloCascada.insertar(turismo));
 		assertDoesNotThrow(() -> verify(vehiculos).insertar(any(Turismo.class)));
-		assertNotSame(turismo, modelo.buscar(turismo));
+		assertNotSame(turismo, modeloCascada.buscar(turismo));
 	}
 
 	@Test
@@ -107,54 +110,54 @@ public class ModeloTest {
 		InOrder orden = inOrder(clientes, vehiculos, alquileres);
 		when(clientes.buscar(cliente)).thenReturn(cliente);
 		when(vehiculos.buscar(turismo)).thenReturn(turismo);
-		assertDoesNotThrow(() -> modelo.insertar(alquiler));
+		assertDoesNotThrow(() -> modeloCascada.insertar(alquiler));
 		orden.verify(clientes).buscar(cliente);
 		orden.verify(vehiculos).buscar(turismo);
 		assertDoesNotThrow(() -> orden.verify(alquileres).insertar(any(Alquiler.class)));
-		assertNotSame(alquiler, modelo.buscar(alquiler));
+		assertNotSame(alquiler, modeloCascada.buscar(alquiler));
 	}
 
 	@Test
 	void insertarAlquilerAlquilerNoValidoLanzaExcepcion() {
 		Alquiler alquilerNulo = null;
-		NullPointerException npe = assertThrows(NullPointerException.class, () -> modelo.insertar(alquilerNulo));
+		NullPointerException npe = assertThrows(NullPointerException.class, () -> modeloCascada.insertar(alquilerNulo));
 		assertEquals(npe.getMessage(), MENSAJE_ERROR_INSERTAR_ALQUILER_NULO);
-		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> modelo.insertar(alquiler));
+		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> modeloCascada.insertar(alquiler));
 		assertEquals(onse.getMessage(), MENSAJE_ERROR_INSERTAR_ALQUILER_CLIENTE_NO_EXISTE);
 		when(clientes.buscar(cliente)).thenReturn(cliente);
-		onse = assertThrows(OperationNotSupportedException.class, () -> modelo.insertar(alquiler));
+		onse = assertThrows(OperationNotSupportedException.class, () -> modeloCascada.insertar(alquiler));
 		assertEquals(onse.getMessage(), MENSAJE_ERROR_INSERTAR_ALQUILER_TURISMO_NO_EXISTE);
 	}
 
 	@Test
 	void buscarClienteLlamaClientesBuscar() {
-		assertDoesNotThrow(() -> modelo.insertar(cliente));
-		Cliente clienteBuscado = modelo.buscar(cliente);
+		assertDoesNotThrow(() -> modeloCascada.insertar(cliente));
+		Cliente clienteBuscado = modeloCascada.buscar(cliente);
 		verify(clientes).buscar(cliente);
 		assertNotSame(cliente, clienteBuscado);
 	}
 
 	@Test
 	void buscarTurismoLlamaTurismosBuscar() {
-		assertDoesNotThrow(() -> modelo.insertar(turismo));
-		Vehiculo turismoBuscado = modelo.buscar(turismo);
+		assertDoesNotThrow(() -> modeloCascada.insertar(turismo));
+		Vehiculo turismoBuscado = modeloCascada.buscar(turismo);
 		verify(vehiculos).buscar(turismo);
 		assertNotSame(turismo, turismoBuscado);
 	}
 
 	@Test
 	void buscarAlquilerLlamaAlquileresBuscar() {
-		assertDoesNotThrow(() -> modelo.insertar(cliente));
+		assertDoesNotThrow(() -> modeloCascada.insertar(cliente));
 		when(clientes.buscar(cliente)).thenReturn(cliente);
 		when(vehiculos.buscar(turismo)).thenReturn(turismo);
-		Alquiler alquilerBuscado = modelo.buscar(alquiler);
+		Alquiler alquilerBuscado = modeloCascada.buscar(alquiler);
 		verify(alquileres).buscar(alquiler);
 		assertNotSame(alquiler, alquilerBuscado);
 	}
 
 	@Test
 	void modificarClienteLlamaClientesBuscarModificar() {
-		assertDoesNotThrow(() -> modelo.modificar(cliente, "Patricio Estrella", "950123456"));
+		assertDoesNotThrow(() -> modeloCascada.modificar(cliente, "Patricio Estrella", "950123456"));
 		assertDoesNotThrow(() -> verify(clientes).modificar(cliente, "Patricio Estrella", "950123456"));
 	}
 
@@ -162,7 +165,7 @@ public class ModeloTest {
 	void devolverAlquilerLlamaAlquileresBuscarAlquilerDevolver() {
 		when(alquileres.buscar(alquiler)).thenReturn(alquiler);
 		LocalDate hoy = LocalDate.now();
-		assertDoesNotThrow(() -> modelo.devolver(alquiler, hoy));
+		assertDoesNotThrow(() -> modeloCascada.devolver(alquiler, hoy));
 		InOrder orden = inOrder(alquileres, alquiler);
 		orden.verify(alquileres).buscar(alquiler);
 		assertDoesNotThrow(() -> orden.verify(alquiler).devolver(hoy));
@@ -170,7 +173,7 @@ public class ModeloTest {
 
 	@Test
 	void devolverAqluilerNoValidoLanzaExcepcion() {
-		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> modelo.devolver(alquiler, LocalDate.now()));
+		OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> modeloCascada.devolver(alquiler, LocalDate.now()));
 		assertEquals(onse.getMessage(), MENSAJE_ERROR_DEVOLVER_ALQUILER_NO_EXISTE);
 	}
 
@@ -178,7 +181,7 @@ public class ModeloTest {
 	void borrarClienteLlamaAlquileresGetPrestamosBorrarClientesBorrar() {
 		simularClienteConAlquileres();
 		InOrder orden = inOrder(clientes, alquileres);
-		assertDoesNotThrow(() -> modelo.borrar(cliente));
+		assertDoesNotThrow(() -> modeloCascada.borrar(cliente));
 		orden.verify(alquileres).get(cliente);
 		for (Alquiler alquiler : alquileres.get(cliente)) {
 			assertDoesNotThrow(() -> orden.verify(alquileres).borrar(alquiler));
@@ -199,7 +202,7 @@ public class ModeloTest {
 	void borrarTurismoLlamaAlquileresGetPrestamosBorrarTurismosBorrar() {
 		simularTurismoConAlquileres();
 		InOrder orden = inOrder(vehiculos, alquileres);
-		assertDoesNotThrow(() -> modelo.borrar(turismo));
+		assertDoesNotThrow(() -> modeloCascada.borrar(turismo));
 		orden.verify(alquileres).get(turismo);
 		for (Alquiler alquiler : alquileres.get(turismo)) {
 			assertDoesNotThrow(() -> orden.verify(alquileres).borrar(alquiler));
@@ -219,7 +222,7 @@ public class ModeloTest {
 	@Test
 	void borrarAlquilerLllamaAlquileresBorrar() {
 		when(alquileres.buscar(alquiler)).thenReturn(alquiler);
-		assertDoesNotThrow(() -> modelo.borrar(alquiler));
+		assertDoesNotThrow(() -> modeloCascada.borrar(alquiler));
 		assertDoesNotThrow(() -> verify(alquileres).borrar(alquiler));
 	}
 
@@ -228,7 +231,7 @@ public class ModeloTest {
 		List<Cliente> clientesDevueltos = new ArrayList<>();
 		clientesDevueltos.add(cliente);
 		when(clientes.get()).thenReturn(clientesDevueltos);
-		List<Cliente> clientesExistentes = modelo.getClientes();
+		List<Cliente> clientesExistentes = modeloCascada.getClientes();
 		verify(clientes).get();
 		clientesExistentes.removeAll(clientesExistentes);
 		assertNotEquals(cliente, clientesExistentes.get(0));
@@ -239,7 +242,7 @@ public class ModeloTest {
 		List<Turismo> turismosDevueltos = new ArrayList<>();
 		turismosDevueltos.add(turismo);
 		when(vehiculos.get()).thenReturn(turismosDevueltos);
-		List<Turismo> turismosExistentes = modelo.getTurismos();
+		List<Turismo> turismosExistentes = modeloCascada.getTurismos();
 		verify(vehiculos).get();
 		assertNotSame(turismo, turismosExistentes.get(0));
 	}
@@ -249,7 +252,7 @@ public class ModeloTest {
 		List<Alquiler> alquileresDevueltos = new ArrayList<>();
 		alquileresDevueltos.add(alquiler);
 		when(alquileres.get()).thenReturn(alquileresDevueltos);
-		List<Alquiler> alquileresExistentes = modelo.getAlquileres();
+		List<Alquiler> alquileresExistentes = modeloCascada.getAlquileres();
 		verify(alquileres).get();
 		assertNotSame(alquiler, alquileresExistentes.get(0));
 	}
@@ -259,7 +262,7 @@ public class ModeloTest {
 		List<Alquiler> alquileresDevueltos = new ArrayList<>();
 		alquileresDevueltos.add(alquiler);
 		when(alquileres.get(cliente)).thenReturn(alquileresDevueltos);
-		List<Alquiler> alquileresCliente = modelo.getAlquileres(cliente);
+		List<Alquiler> alquileresCliente = modeloCascada.getAlquileres(cliente);
 		verify(alquileres).get(cliente);
 		assertNotSame(alquiler, alquileresCliente.get(0));
 	}
@@ -269,7 +272,7 @@ public class ModeloTest {
 		List<Alquiler> alquileresDevueltos = new ArrayList<>();
 		alquileresDevueltos.add(alquiler);
 		when(alquileres.get(turismo)).thenReturn(alquileresDevueltos);
-		List<Alquiler> alquileresTurismo = modelo.getAlquileres(turismo);
+		List<Alquiler> alquileresTurismo = modeloCascada.getAlquileres(turismo);
 		verify(alquileres).get(turismo);
 		assertNotSame(alquiler, alquileresTurismo.get(0));
 	}

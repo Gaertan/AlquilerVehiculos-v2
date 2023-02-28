@@ -4,14 +4,14 @@ package org.iesalandalus.programacion.alquilervehiculos.modelo.dominio;
 public class Turismo extends Vehiculo {
 	private final int FACTOR_CILINDRADA = 10;
 	private int cilindrada;
-	
-	
+
+
 	public Turismo(String marca, String modelo, int cilindrada, String matricula) {
 
 		super( marca,  modelo,  matricula);
 
 		setCilindrada(cilindrada);
-		
+
 	}
 
 	public Turismo(Turismo vehiculo) {
@@ -32,7 +32,7 @@ public class Turismo extends Vehiculo {
 	}
 
 	public int getCilindrada() {return this.cilindrada;}
-	
+
 
 	@Override
 	public Vehiculo getVehiculoConMatricula(String matricula){

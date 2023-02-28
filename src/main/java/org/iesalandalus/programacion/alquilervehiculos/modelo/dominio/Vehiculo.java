@@ -13,7 +13,7 @@ public abstract class Vehiculo {
 	protected String matricula;
 
 	protected Vehiculo() {
-	
+
 	}
 
 	protected Vehiculo(String marca, String modelo, String matricula) {
@@ -21,21 +21,21 @@ public abstract class Vehiculo {
 		setModelo(modelo);
 		setMatricula(matricula);
 	}
-	
+
 	protected Vehiculo(Vehiculo vehiculo) {
 		setMarca(vehiculo.getMarca());
 		setModelo(vehiculo.getModelo());
 		setMatricula(vehiculo.getMatricula());
-	
+
 	}
 	public Vehiculo copiar(Vehiculo vehiculo) throws OperationNotSupportedException {
-		
+
 		if(vehiculo instanceof Turismo) {return new Turismo ((Turismo)vehiculo);}
 		else if(vehiculo instanceof Autobus) {return new Autobus ((Autobus)vehiculo);}
 		else if(vehiculo instanceof Furgoneta) {return new Furgoneta ((Furgoneta)vehiculo);}
 		else throw new OperationNotSupportedException("ERROR; El tipo de vehículo no se encuentra en nuestra lista");
 	}
-	
+
 	public abstract Vehiculo getVehiculoConMatricula(String matricula);
 
 	protected abstract int getFactorPrecio();

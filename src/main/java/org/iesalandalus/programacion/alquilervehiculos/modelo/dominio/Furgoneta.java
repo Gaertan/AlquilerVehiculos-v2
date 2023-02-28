@@ -6,8 +6,8 @@ public class Furgoneta extends Vehiculo {
 	private final int FACTOR_PMA = 100;
 	private int plazas = 5;
 	private int pma = 3500;
-	
-	
+
+
 	public int getPma() {
 		return pma;
 	}
@@ -22,7 +22,7 @@ public class Furgoneta extends Vehiculo {
 
 		setPlazas(plazas);
 		setPma(pma);
-		
+
 	}
 
 	public Furgoneta(Furgoneta furgoneta) {
@@ -43,7 +43,7 @@ public class Furgoneta extends Vehiculo {
 	}
 
 	public int getPlazas() {return this.plazas;}
-	
+
 	public static Vehiculo getAutobusConMatricula(String matricula){
 		if (matricula==null) if (matricula == null) {throw new NullPointerException("ERROR: La matrícula no puede ser nula.");}
 		return new Furgoneta("Seat","Leon",5,2900, matricula);
@@ -64,7 +64,7 @@ public class Furgoneta extends Vehiculo {
 		if (matricula==null) if (matricula == null) {throw new NullPointerException("ERROR: La matrícula no puede ser nula.");}
 		return new Furgoneta("Seat","Leon",2900,6,matricula);
 		}
-	
+
 
 
 }

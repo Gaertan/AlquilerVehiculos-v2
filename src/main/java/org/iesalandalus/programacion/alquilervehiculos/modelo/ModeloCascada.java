@@ -9,35 +9,18 @@ import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IAlquileres;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IClientes;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IFuenteDatos;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IVehiculos;
 
+public class ModeloCascada extends Modelo {
 
-public class Modelo {
-
-	protected IAlquileres alquileres;
-	protected IClientes clientes;
-	protected IVehiculos vehiculos;
-	protected IFuenteDatos fuenteDatos;
-
-	protected void setFuenteDatos(IFuenteDatos fuentedatos) {
-		//if(fuenteDatos==null) {throw new NullPointerException("la fuente de datos no puede ser nula");}
-		this.fuenteDatos=fuentedatos;}
-
-	public Modelo() {
+	public ModeloCascada(IFuenteDatos fuenteDatos){
 		super();
+		setFuenteDatos(fuenteDatos);
+		comenzar();
 	}
 
-	public void comenzar() {
-		alquileres = fuenteDatos.crearAlquileres();
-		clientes = fuenteDatos.crearClientes();
-		vehiculos = fuenteDatos.crearVehiculos() ;
-	}
 
-	public void terminar() {System.out.println("la ejecucion del modelo ha terminado");}
-
+	@Override
 	public void insertar(Cliente cliente) throws OperationNotSupportedException {
 	/*	if(cliente==null) {throw new NullPointerException("ERROR: No existe el cliente del alquiler.");}
 		if(buscar(cliente)!=null) {
@@ -53,6 +36,7 @@ public class Modelo {
 
 	}
 
+	@Override
 	public void insertar(Vehiculo vehiculo) throws OperationNotSupportedException {
 	/*	if(vehiculo==null) {throw new NullPointerException("ERROR: No existe el vehiculo del alquiler.");}
 		Vehiculo vehiculo2 = new Vehiculo(vehiculo);
@@ -64,6 +48,7 @@ public class Modelo {
 		vehiculos.insertar(vehiculo);
 	}
 
+	@Override
 	public void insertar(Alquiler alquiler) throws OperationNotSupportedException {/*
 			if(alquiler==null) {throw new NullPointerException("ERROR: No se puede realizar un alquiler nulo.");}
 			Alquiler alquiler2 = new Alquiler(alquileres.buscar(alquiler));
@@ -86,14 +71,19 @@ public class Modelo {
 
 		}
 
+	@Override
 	public Cliente buscar(Cliente cliente) {Cliente clienteR = new Cliente(clientes.buscar(cliente));return clienteR;}
 
+	@Override
 	public Vehiculo buscar(Vehiculo vehiculo) {Vehiculo vehiculoR =(vehiculos.buscar(vehiculo));return vehiculoR;}
 
+	@Override
 	public Alquiler buscar(Alquiler alquiler) {Alquiler alquilerR = new Alquiler(alquileres.buscar(alquiler));return alquilerR;}
 
+	@Override
 	public void modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException {clientes.modificar(cliente, nombre, telefono);}
 
+	@Override
 	public void devolver(Alquiler alquiler, LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException {
 			if(alquileres.buscar(alquiler)==null) {throw new OperationNotSupportedException("ERROR: No existe el alquiler a devolver.");}
 			alquileres.devolver(alquiler, fechaDevolucion);
@@ -109,6 +99,7 @@ public class Modelo {
 		*/
 	}
 
+	@Override
 	public void borrar(Cliente cliente) throws OperationNotSupportedException {
 
 		//borramos todos los alquileres pertenecientes al cliente
@@ -122,6 +113,7 @@ public class Modelo {
 		}
 	}
 
+	@Override
 	public void borrar(Vehiculo vehiculo) throws OperationNotSupportedException {		//borramos todos los alquileres pertenecientes al cliente
 	for(Alquiler alq:getAlquileres(vehiculo)) {
 		if(alq.getVehiculo().equals(vehiculo)) {alquileres.borrar(alq);}
@@ -132,8 +124,10 @@ public class Modelo {
 
 	}}
 
+	@Override
 	public void borrar(Alquiler alquiler) throws OperationNotSupportedException {alquileres.borrar(alquiler);}
 
+	@Override
 	public List<Cliente> getClientes() {
 
 		List<Cliente> clientesR = new ArrayList<>();
@@ -146,6 +140,7 @@ public class Modelo {
 
 	}
 
+	@Override
 	public List<Vehiculo> getVehiculos() {
 
 	List<Vehiculo> vehiculosR = new ArrayList<>();
@@ -160,6 +155,7 @@ public class Modelo {
 		}
 	return vehiculosR;}
 
+	@Override
 	public List<Alquiler> getAlquileres() {
 			List<Alquiler> alquilerR = new ArrayList<>();
 		for (Alquiler alquiler : alquileres.get()) {
@@ -170,6 +166,7 @@ public class Modelo {
 		return alquilerR;
 	}
 
+	@Override
 	public List<Alquiler> getAlquileres(Cliente cliente) {
 		List<Alquiler> alquilerR = new ArrayList<>();
 	for (Alquiler alquiler : alquileres.get(cliente)) {
@@ -182,6 +179,7 @@ public class Modelo {
 
 	}
 
+	@Override
 	public List<Alquiler> getAlquileres(Vehiculo vehiculo) {
 		List<Alquiler> alquilerR = new ArrayList<>();
 	for (Alquiler alquiler : alquileres.get(vehiculo)) {
