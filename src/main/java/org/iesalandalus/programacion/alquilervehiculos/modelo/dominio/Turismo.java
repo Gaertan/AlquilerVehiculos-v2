@@ -42,7 +42,18 @@ public class Turismo extends Vehiculo {
 
 	@Override
 	public String toString() {
-		return (String.format("%s %s (%sCV) - %s -turismo", marca, modelo, cilindrada, matricula, "disponible"));
+		
+		/*PARA REALIZAR EL CAMBIO CORRECTO DE CV A CC NOS FALTAN DATOS;
+		 * Casi todos los motores de los automóviles de carreras no tienen una relación de cc a hp
+		 *  en una gama de 13 de 25:1 (es decir, algunos motores pueden producir 100 hp por cada 1300 cc
+		 *  , pero otros requieren hasta 2500 cc para producir los mismos 100 hp).
+		 *   El sitio web Simetric (ver Recursos) ofrece una carta con una extensa lista de relaciones de cc a hp de varios tipos de motores.
+		 
+		 *ES DECIR SIN SABER LA RELACION DE CADA MOTOR NO PODEMOS HACER LA CONVERSION DE CV A CC
+		 *por tanto se pide solo que se introduzca directamente en cc
+		 *
+		 */
+		return (String.format("%s %s (%sCC) - %s -turismo", marca, modelo, cilindrada, matricula, "disponible"));
 	}
 
 	@Override

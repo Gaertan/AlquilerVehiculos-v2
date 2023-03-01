@@ -1,10 +1,10 @@
-package org.iesalandalus.programacion.alquilervehiculos.vista;
+package org.iesalandalus.programacion.alquilervehiculos.vista.texto;
 
 import javax.naming.OperationNotSupportedException;
 
 public enum Accion {
 	SALIR("Salir"){public void ejecutar() {
-					vista.terminar();
+					vistaTexto.terminar();
 	}},
 	
 	
@@ -13,42 +13,42 @@ public enum Accion {
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.insertarCliente();
+			vistaTexto.insertarCliente();
 		}},
 	INSERTAR_TURISMO("Insertar vehiculo"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.insertarVehiculo();
+			vistaTexto.insertarVehiculo();
 		}},
 	INSERTAR_ALQUILER("Insertar alquiler"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.insertarAlquiler();
+			vistaTexto.insertarAlquiler();
 		}},
 	BUSCAR_CLIENTE("Buscar cliente"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.buscarCliente();
+			vistaTexto.buscarCliente();
 		}},
 	BUSCAR_TURISMO("Buscar vehiculo"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.buscarTurismo();
+			vistaTexto.buscarTurismo();
 		}},
 	BUSCAR_ALQUILER("Buscar alquiler"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.buscarAlquiler();
+			vistaTexto.buscarAlquiler();
 			
 		}},
 	MODIFICAR_CLIENTE("Modificar cliente"){
@@ -56,72 +56,72 @@ public enum Accion {
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.modificarCliente();
+			vistaTexto.modificarCliente();
 		}},
 	DEVOLVER_ALQUILER("Devolver alquiler"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.devolverAlquiler();
+			vistaTexto.devolverAlquiler();
 		}},
 	BORRAR_CLIENTE("Borrar cliente"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.borrarCliente();
+			vistaTexto.borrarCliente();
 		}},
 	BORRAR_TURISMO("Borrar vehiculo"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.borrarTurismo();
+			vistaTexto.borrarTurismo();
 		}},
 	BORRAR_ALQUILER("Borrar alquiler"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.borrarAlquiler();
+			vistaTexto.borrarAlquiler();
 		}},
 	LISTAR_CLIENTES("Listar clientes"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.listarCliente();
+			vistaTexto.listarCliente();
 		}},
 	LISTAR_TURISMOS("Listar vehiculo"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.listarTurismo();
+			vistaTexto.listarTurismo();
 		}},
 	LISTAR_ALQUILERES("Listar alquileres"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.listarAlquiler();
+			vistaTexto.listarAlquiler();
 		}},
 	LISTAR_ALQUILERES_CLIENTES("Listar alquileres de clientes"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.listarAlquileresCliente();
+			vistaTexto.listarAlquileresCliente();
 		}},
 	LISTAR_ALQUILERES_TURISMO("Listar alquileres de vehiculos"){
 
 		@Override
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.listarAlquileresTurismo();
+			vistaTexto.listarAlquileresTurismo();
 		}};
-	protected Vista vista;
+	protected VistaTexto vistaTexto;
 	private String cadenaAmostrar;
 
 	Accion(String cadenaAmostrar){this.cadenaAmostrar=cadenaAmostrar;}
@@ -137,7 +137,7 @@ public enum Accion {
 
 
 
-	protected void setVista(Vista vista) {this.vista=vista;}
+	protected void setVista(VistaTexto vistaTexto) {this.vistaTexto=vistaTexto;}
 	
 	protected abstract void ejecutar();
 

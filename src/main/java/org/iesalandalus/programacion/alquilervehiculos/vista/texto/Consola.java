@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.alquilervehiculos.vista;
+package org.iesalandalus.programacion.alquilervehiculos.vista.texto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,7 +12,6 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Furgoneta;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
-import org.iesalandalus.programacion.alquilervehiculos.vista.texto.tipoVehiculo;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 public class Consola {
@@ -275,7 +274,7 @@ public class Consola {
 				
 				switch(tipovehiculo) {
 				case TURISMO:
-					do {System.out.print("Introduzca la cilindrada ; ");
+					do {System.out.print("Introduzca la cilindrada en centimetros cubicos(solo el numero de esta) ; ");
 					cilindrada = Entrada.entero();}
 					while (cilindrada<=0);
 					try { vehiculo = new Turismo(marca,modelo,cilindrada,matricula);return vehiculo;}
@@ -298,7 +297,7 @@ public class Consola {
 					while (plazas<=0);
 					do {System.out.print("Introduzca el pma (peso maximo autorizado) ; ");
 					pma = Entrada.entero();}
-					while (pma<=0);
+					while (pma<=0||pma>4300);
 					
 					try { vehiculo = new Furgoneta(marca,modelo,pma,plazas,matricula);return vehiculo;}
 					catch(Exception e) {System.out.println("algo ha salido mal leyendo la furgoneta;");System.out.print(e.getMessage());}

@@ -13,18 +13,18 @@ import org.iesalandalus.programacion.alquilervehiculos.vista.Vista;
 
 public class Controlador {
 
-	private Vista vista;
+	private Vista vistaTexto;
 	private Modelo modeloCascada;
-	public Controlador(Modelo modeloCascada, Vista vista){
-		if(modeloCascada!=null&&vista!=null) {this.modeloCascada=modeloCascada;this.vista=vista;}vista.setControlador(this);}
+	public Controlador(Modelo modeloCascada, Vista vistaTexto){
+		if(modeloCascada!=null&&vistaTexto!=null) {this.modeloCascada=modeloCascada;this.vistaTexto=vistaTexto;}vistaTexto.setControlador(this);}
 
 
 
 
 
-	public void  comenzar(){modeloCascada.comenzar();vista.comenzar();}
+	public void  comenzar(){modeloCascada.comenzar();vistaTexto.comenzar();}
 
-	public void  terminar(){modeloCascada.terminar();vista.terminar();}
+	public void  terminar(){modeloCascada.terminar();vistaTexto.terminar();}
 
 	public void  insertar(Cliente cliente) throws OperationNotSupportedException{modeloCascada.insertar(cliente);}
 
