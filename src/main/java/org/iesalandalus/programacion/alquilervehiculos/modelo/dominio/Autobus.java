@@ -44,7 +44,7 @@ public class Autobus extends Vehiculo {
 	}
 	@Override
 	public String toString() {
-		return (String.format("%s %s (%splazas) - %s", marca, modelo, plazas, matricula, "disponible"));
+		return (String.format("%s %s (%s plazas) - %s -Autobus", marca, modelo, plazas, matricula, "disponible"));
 	}
 
 	@Override

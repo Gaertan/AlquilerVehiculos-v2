@@ -76,7 +76,7 @@ public abstract class Vehiculo implements Comparable<Vehiculo>{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if ((obj == null) || (getClass() != obj.getClass()))
+		if ((obj == null))
 			return false;
 		Vehiculo other = (Vehiculo) obj;
 		return Objects.equals(matricula, other.matricula);

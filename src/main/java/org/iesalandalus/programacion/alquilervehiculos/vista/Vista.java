@@ -16,7 +16,7 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IClientes;
 
 public class Vista {
 
-	private Controlador controlador;
+	protected Controlador controlador;
 
 
 	public void setControlador(Controlador controlador) {
@@ -26,76 +26,76 @@ public class Vista {
 
 
 	public void comenzar() {
-		Opcion opcion = null;
+		Accion accion = null;
 
 		do {
 
-		while (opcion==null) {
+		while (accion==null) {
 			Consola.mostrarMenu();
-			try {opcion = Consola.elegirOpcion();} catch (OperationNotSupportedException e){e.getMessage();}
+			try {accion = Consola.elegirOpcion();} catch (OperationNotSupportedException e){e.getMessage();}
 
-				if(opcion!=null) {
-					switch(opcion) {
+				if(accion!=null) {
+					switch(accion) {
 					  case INSERTAR_CLIENTE:
 					    insertarCliente();
-						  opcion = null;break;
+						  accion = null;break;
 					  case INSERTAR_TURISMO:
-						 insertarTurismo();
-							  opcion = null;break;
+						 insertarVehiculo();
+							  accion = null;break;
 
 					  case INSERTAR_ALQUILER:
 						    insertarAlquiler();
-							  opcion = null;break;
+							  accion = null;break;
 
 					  case BUSCAR_CLIENTE:
 						   buscarCliente();
-							  opcion = null;break;
+							  accion = null;break;
 
 					  case BUSCAR_TURISMO:
 						    buscarTurismo();
-							  opcion = null;break;
+							  accion = null;break;
 
 					  case BUSCAR_ALQUILER:
 						   	buscarAlquiler();
-							  opcion = null;break;
+							  accion = null;break;
 
 					  case MODIFICAR_CLIENTE:
 						    modificarCliente();
-							  opcion = null;break;
+							  accion = null;break;
 
 					  case DEVOLVER_ALQUILER:
 						   	devolverAlquiler();
-							  opcion = null;break;
+							  accion = null;break;
 
 					  case BORRAR_CLIENTE:
 						    borrarCliente();
-							  opcion = null;break;
+							  accion = null;break;
 
 					  case BORRAR_TURISMO:
 						    borrarTurismo();
-							  opcion = null;break;
+							  accion = null;break;
 
 					  case BORRAR_ALQUILER:
 						    borrarAlquiler();
-							  opcion = null;break;
+							  accion = null;break;
 					  case LISTAR_CLIENTES:
 						    listarCliente();
-							  opcion = null;break;
+							  accion = null;break;
 					  case LISTAR_TURISMOS:
 						    listarTurismo();
-							  opcion = null;break;
+							  accion = null;break;
 					  case LISTAR_ALQUILERES:
 						    listarAlquiler();
-							  opcion = null;break;
+							  accion = null;break;
 					  case LISTAR_ALQUILERES_CLIENTES:
 						    listarAlquileresCliente();
-							  opcion = null;break;
+							  accion = null;break;
 					  case LISTAR_ALQUILERES_TURISMO:
 						    listarAlquileresTurismo();
-							  opcion = null;break;
+							  accion = null;break;
 
 					  default:
-					   opcion = Opcion.SALIR;
+					   accion = Accion.SALIR;
 					}
 				}
 			}
@@ -104,90 +104,90 @@ public class Vista {
 
 
 
-		} while (opcion != Opcion.SALIR);
+		} while (accion != Accion.SALIR);
 		terminar();
 
 	}
 
 	public void terminar() {System.out.println("Hasta aqui la ejecucion del programa");}
 
-	private void insertarCliente() {
+	protected void insertarCliente() {
 
-		Consola.mostrarCabecera("Opcion insertar cliente");
+		Consola.mostrarCabecera("Accion insertar cliente");
 		Cliente cliente = Consola.leerCliente();
 
 		try{controlador.insertar(cliente);}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
-	private void insertarTurismo() {
-		Consola.mostrarCabecera("Opcion insertar turismo");
-		Turismo turismo = Consola.leerTurismo();
+	protected void insertarVehiculo() {
+		Consola.mostrarCabecera("Accion insertar vehiculo");
+		Vehiculo vehiculo = Consola.leerVehiculo();
 
-		try{controlador.insertar(turismo);}catch(Exception e) {System.out.println(e.getMessage());}}
+		try{controlador.insertar(vehiculo);}catch(Exception e) {System.out.println(e.getMessage());}}
 
-	private void insertarAlquiler() {
-		Consola.mostrarCabecera("Opcion insertar alquiler");
+	protected void insertarAlquiler() {
+		Consola.mostrarCabecera("Accion insertar alquiler");
 		Alquiler alquiler = Consola.leerAlquiler();
 
 		try{controlador.insertar(alquiler);}catch(Exception e) {System.out.println(e.getMessage());}}
 
-	private void buscarCliente() {
-		Consola.mostrarCabecera("Opcion buscar cliente");
+	protected void buscarCliente() {
+		Consola.mostrarCabecera("Accion buscar cliente");
 		Cliente cliente = Consola.leerClienteDni();
 		try{cliente=controlador.buscar(cliente);System.out.println(cliente);}catch(Exception e) {System.out.println(e.getMessage());}
 
 	}
 
-	private void buscarTurismo() {
-		Consola.mostrarCabecera("Opcion buscar turismo");
+	protected void buscarTurismo() {
+		Consola.mostrarCabecera("Accion buscar vehiculo");
 		Vehiculo turismo = Consola.leerTurismoMatricula();
 		try{turismo = controlador.buscar(turismo);System.out.println(turismo); }catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
-	private void buscarAlquiler() {
-		Consola.mostrarCabecera("Opcion buscar alquiler");
+	protected void buscarAlquiler() {
+		Consola.mostrarCabecera("Accion buscar alquiler");
 		Alquiler alquiler = Consola.leerAlquiler();
 		try{alquiler = controlador.buscar(alquiler);System.out.println(alquiler);}catch(Exception e) {System.out.println(e.getMessage());}
 
 	}
 
-	private void modificarCliente() {
-		Consola.mostrarCabecera("Opcion modificar cliente");
+	protected void modificarCliente() {
+		Consola.mostrarCabecera("Accion modificar cliente");
 		Cliente cliente = Consola.leerClienteDni();
 		String nombre = Consola.leerNombre();
 		String telefono = Consola.leerTelefono();
 		try{controlador.modificar(cliente, nombre, telefono);}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
-	private void devolverAlquiler() {
-		Consola.mostrarCabecera("Opcion devolver alquiler");
+	protected void devolverAlquiler() {
+		Consola.mostrarCabecera("Accion devolver alquiler");
 		Alquiler alquiler = Consola.leerAlquiler();
 		LocalDate fechaDevolucion = Consola.leerFechaDevolucion();
 		try{controlador.devolver(alquiler, fechaDevolucion);}catch(Exception e) {System.out.println(e.getMessage());}
 
 	}
 
-	private void borrarCliente() {
-		Consola.mostrarCabecera("Opcion borrar cliente");
+	protected void borrarCliente() {
+		Consola.mostrarCabecera("Accion borrar cliente");
 		Cliente cliente = Consola.leerClienteDni();
 		try{controlador.borrar(cliente);}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
-	private void borrarTurismo() {
-		Consola.mostrarCabecera("Opcion borrar turismo");
+	protected void borrarTurismo() {
+		Consola.mostrarCabecera("Accion borrar vehiculo");
 		Vehiculo turismo = Consola.leerTurismoMatricula();
 		try{controlador.borrar(turismo);}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
-	private void borrarAlquiler() {
-		Consola.mostrarCabecera("Opcion borrar alquiler");
+	protected void borrarAlquiler() {
+		Consola.mostrarCabecera("Accion borrar alquiler");
 		Alquiler alquiler = Consola.leerAlquiler();
 		try{controlador.borrar(alquiler);}catch(Exception e) {System.out.println(e.getMessage());}
 
 	}
 
-	private void listarCliente() {
-		Consola.mostrarCabecera("Opcion listar clientes");
+	protected void listarCliente() {
+		Consola.mostrarCabecera("Accion listar clientes");
 		//Cliente cliente = Consola.leerCliente();
 		
 		
@@ -203,8 +203,8 @@ public class Vista {
 		//try{System.out.println(controlador.getClientes());}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
-	private void listarTurismo() {
-		Consola.mostrarCabecera("Opcion listar todos los turismos");
+	protected void listarTurismo() {
+		Consola.mostrarCabecera("Accion listar todos los vehiculos");
 		//Turismo turismo = Consola.leerTurismo();
 		
 		List<Vehiculo> vehiculos = controlador.getVehiculos();
@@ -219,8 +219,8 @@ public class Vista {
 		//try{System.out.println(controlador.getVehiculos());}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
-	private void listarAlquiler() {
-		Consola.mostrarCabecera("Opcion listar alquileres");
+	protected void listarAlquiler() {
+		Consola.mostrarCabecera("Accion listar alquileres");
 
 		List<Alquiler> alquileres = controlador.getAlquileres();
 		Collections.sort(alquileres);
@@ -235,8 +235,8 @@ public class Vista {
 
 	}
 
-	private void listarAlquileresCliente() {
-		Consola.mostrarCabecera("Opcion listar alquileres de un cliente");
+	protected void listarAlquileresCliente() {
+		Consola.mostrarCabecera("Accion listar alquileres de un cliente");
 		Cliente cliente = Consola.leerClienteDni();
 		
 
@@ -251,8 +251,8 @@ public class Vista {
 	//	try{System.out.println(controlador.getAlquileres(cliente));}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
-	private void listarAlquileresTurismo() {
-		Consola.mostrarCabecera("Opcion listar alquileres de un turismo");
+	protected void listarAlquileresTurismo() {
+		Consola.mostrarCabecera("Accion listar alquileres de un vehiculo");
 		Vehiculo turismo = Consola.leerTurismoMatricula();
 		
 

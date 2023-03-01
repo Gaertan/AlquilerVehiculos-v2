@@ -7,8 +7,12 @@ import java.time.format.DateTimeParseException;
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Autobus;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Furgoneta;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.alquilervehiculos.vista.texto.tipoVehiculo;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 public class Consola {
@@ -28,8 +32,8 @@ public class Consola {
 	public static void mostrarMenu(){
 		mostrarCabecera("Gestión de reservas de vehiculos");
 		System.out.println("");
-		for (Opcion opcion: Opcion.values()) {
-			System.out.print(opcion.ordinal());System.out.print("- ");System.out.println(opcion);
+		for (Accion accion: Accion.values()) {
+			System.out.print(accion.ordinal());System.out.print("- ");System.out.println(accion);
 		}
 	}
 
@@ -57,11 +61,11 @@ public class Consola {
 		return fecha;
 	}
 
-	public static Opcion elegirOpcion() throws OperationNotSupportedException{
+	public static Accion elegirOpcion() throws OperationNotSupportedException{
 
-		try{Opcion opcionR = null;
+		try{Accion opcionR = null;
 
-			while(opcionR==null) {int ordinal = leerEntero("Introduzca el numero de la opción a ejecutar");opcionR = Opcion.values()[ordinal];}
+			while(opcionR==null) {int ordinal = leerEntero("Introduzca el numero de la opción a ejecutar");opcionR = Accion.values()[ordinal];}
 			return opcionR;
 
 			}catch(Exception e) {System.out.println("algo ha salido mal al escoger opcion;");System.out.print(e.getMessage());}
@@ -217,8 +221,111 @@ public class Consola {
 
 
 
+	private static void mostrarMenuTiposVehiculos() {
+		mostrarCabecera("Estos son los tipos de vehiculos a escoger");
+		System.out.println("");
+		for (tipoVehiculo tipovehiculo: tipoVehiculo.values()) {
+			System.out.print(tipovehiculo.ordinal());System.out.print("- ");System.out.println(tipovehiculo);
+		}
+	
+		
+	}
+	
+	
+	
+	
+	private static tipoVehiculo elegirTipoVehiculo() {
+		try{tipoVehiculo opcionR = null;
 
+		while(opcionR==null) {int ordinal = leerEntero("Introduzca el numero del vehiculo a insertar");opcionR = tipoVehiculo.values()[ordinal];}
+		return opcionR;
 
+		}catch(Exception e) {System.out.println("algo ha salido mal al escoger opcion;");System.out.print(e.getMessage());}
+	return null;
+		
+		
+	}
+	
+	
+	
+	
+	private static Vehiculo leerVehiculo(tipoVehiculo tipovehiculo) {
+		mostrarMenuTiposVehiculos();
+		 String marca;
+		 String modelo;
+		 int cilindrada = -1;
+		 int plazas = -1;
+		 int pma = -1;
+		 String matricula;
+		 Vehiculo vehiculo = null;
+			do {
+				do {System.out.print("Introduzca el nombre de la marca ; ");
+				marca = Entrada.cadena();}
+				while (marca.equals(""));
+
+				do {System.out.print("Introduzca el nombre del modelo; ");
+				modelo = Entrada.cadena();}
+				while (modelo.equals(""));
+
+				do {System.out.print("Introduzca la matricula (4 números y 3 letras no vocales) ; ");
+				matricula = Entrada.cadena();}
+				while (matricula.equals(""));
+				
+				
+				
+				switch(tipovehiculo) {
+				case TURISMO:
+					do {System.out.print("Introduzca la cilindrada ; ");
+					cilindrada = Entrada.entero();}
+					while (cilindrada<=0);
+					try { vehiculo = new Turismo(marca,modelo,cilindrada,matricula);return vehiculo;}
+					catch(Exception e) {System.out.println("algo ha salido mal leyendo el turismo;");System.out.print(e.getMessage());}
+
+					break;
+				
+				case AUTOBUS:
+					do {System.out.print("Introduzca las plazas ; ");
+					plazas = Entrada.entero();}
+					while (plazas<=0);
+					try { vehiculo = new Autobus(marca,modelo,plazas,matricula);return vehiculo;}
+					catch(Exception e) {System.out.println("algo ha salido mal leyendo el autobus;");System.out.print(e.getMessage());}
+
+					break;
+				
+				case FURGONETA:
+					do {System.out.print("Introduzca las plazas ; ");
+					plazas = Entrada.entero();}
+					while (plazas<=0);
+					do {System.out.print("Introduzca el pma (peso maximo autorizado) ; ");
+					pma = Entrada.entero();}
+					while (pma<=0);
+					
+					try { vehiculo = new Furgoneta(marca,modelo,pma,plazas,matricula);return vehiculo;}
+					catch(Exception e) {System.out.println("algo ha salido mal leyendo la furgoneta;");System.out.print(e.getMessage());}
+
+					break;
+					
+					
+					
+					
+				default:	
+				}
+			}while(vehiculo==null);
+				return vehiculo;
+		 		
+		 
+	}
+
+	public static Vehiculo leerVehiculo() {
+		Vehiculo vehiculo;
+		mostrarMenuTiposVehiculos();
+		vehiculo = leerVehiculo(elegirTipoVehiculo());
+		// TODO Auto-generated method stub
+		return vehiculo;
+	}
+	
+		
+				
 
 
 

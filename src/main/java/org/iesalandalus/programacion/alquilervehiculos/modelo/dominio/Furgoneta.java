@@ -51,7 +51,7 @@ public class Furgoneta extends Vehiculo {
 
 	@Override
 	public String toString() {
-		return (String.format("%s %s (%splazas) %s - %s", marca, modelo, plazas,pma, matricula, "disponible"));
+		return (String.format("%s %s (%s plazas) %s pma - %s -Furgoneta", marca, modelo, plazas,pma, matricula, "disponible"));
 	}
 
 	@Override
