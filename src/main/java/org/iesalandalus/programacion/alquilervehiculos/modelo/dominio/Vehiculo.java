@@ -81,16 +81,16 @@ public abstract class Vehiculo implements Comparable<Vehiculo>{
 		Vehiculo other = (Vehiculo) obj;
 		return Objects.equals(matricula, other.matricula);
 	}
-	
+
     @Override
     public int compareTo(Vehiculo vehiculo) {
-       String a=new String( this.getMarca()+this.getModelo()+this.getMatricula()); 
+       String a=new String( this.getMarca()+this.getModelo()+this.getMatricula());
        String b=new String(vehiculo.getMarca()+vehiculo.getModelo()+vehiculo.getMatricula());
        int compara = a.compareTo(b);
 
        return compara;
-       
-       
+
+
    }
 
 }

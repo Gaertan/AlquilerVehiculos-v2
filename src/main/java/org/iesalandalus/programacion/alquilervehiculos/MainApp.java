@@ -12,7 +12,7 @@ public class MainApp {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		
+
 		/*ya que aun no tenemos el resto de opciones del patron factoria se pasarça directamente la vista texto y el modelo de memoria*/
 		Vista vistaTexto = new VistaTexto();
 		Modelo modeloCascada = new ModeloCascada(FactoriaFuenteDatos.MEMORIA.crear());

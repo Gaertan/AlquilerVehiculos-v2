@@ -226,13 +226,13 @@ public class Consola {
 		for (tipoVehiculo tipovehiculo: tipoVehiculo.values()) {
 			System.out.print(tipovehiculo.ordinal());System.out.print("- ");System.out.println(tipovehiculo);
 		}
-	
-		
+
+
 	}
-	
-	
-	
-	
+
+
+
+
 	private static tipoVehiculo elegirTipoVehiculo() {
 		try{tipoVehiculo opcionR = null;
 
@@ -241,13 +241,13 @@ public class Consola {
 
 		}catch(Exception e) {System.out.println("algo ha salido mal al escoger opcion;");System.out.print(e.getMessage());}
 	return null;
-		
-		
+
+
 	}
-	
-	
-	
-	
+
+
+
+
 	private static Vehiculo leerVehiculo(tipoVehiculo tipovehiculo) {
 		mostrarMenuTiposVehiculos();
 		 String marca;
@@ -269,9 +269,9 @@ public class Consola {
 				do {System.out.print("Introduzca la matricula (4 números y 3 letras no vocales) ; ");
 				matricula = Entrada.cadena();}
 				while (matricula.equals(""));
-				
-				
-				
+
+
+
 				switch(tipovehiculo) {
 				case TURISMO:
 					do {System.out.print("Introduzca la cilindrada en centimetros cubicos(solo el numero de esta) ; ");
@@ -281,7 +281,7 @@ public class Consola {
 					catch(Exception e) {System.out.println("algo ha salido mal leyendo el turismo;");System.out.print(e.getMessage());}
 
 					break;
-				
+
 				case AUTOBUS:
 					do {System.out.print("Introduzca las plazas ; ");
 					plazas = Entrada.entero();}
@@ -290,7 +290,7 @@ public class Consola {
 					catch(Exception e) {System.out.println("algo ha salido mal leyendo el autobus;");System.out.print(e.getMessage());}
 
 					break;
-				
+
 				case FURGONETA:
 					do {System.out.print("Introduzca las plazas ; ");
 					plazas = Entrada.entero();}
@@ -298,21 +298,21 @@ public class Consola {
 					do {System.out.print("Introduzca el pma (peso maximo autorizado) ; ");
 					pma = Entrada.entero();}
 					while (pma<=0||pma>4300);
-					
+
 					try { vehiculo = new Furgoneta(marca,modelo,pma,plazas,matricula);return vehiculo;}
 					catch(Exception e) {System.out.println("algo ha salido mal leyendo la furgoneta;");System.out.print(e.getMessage());}
 
 					break;
-					
-					
-					
-					
-				default:	
+
+
+
+
+				default:
 				}
 			}while(vehiculo==null);
 				return vehiculo;
-		 		
-		 
+
+
 	}
 
 	public static Vehiculo leerVehiculo() {
@@ -322,9 +322,9 @@ public class Consola {
 		// TODO Auto-generated method stub
 		return vehiculo;
 	}
-	
-		
-				
+
+
+
 
 
 

@@ -132,11 +132,11 @@ public class Alquiler implements Comparable<Alquiler>{
 
 	@Override
 	public int compareTo(Alquiler alquiler) {
-	
+
 		int compara = getFechaAlquiler().compareTo(alquiler.getFechaAlquiler());
 		if(compara==0) {compara = getCliente().compareTo(alquiler.getCliente());}
 		return compara;
-		
+
 	}
 
 

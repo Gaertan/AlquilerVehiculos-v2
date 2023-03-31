@@ -120,21 +120,21 @@ public class Cliente implements Comparable<Cliente>{
 
 	@Override
 	public String toString() {return (String.format("%s - %s (%s)", nombre, dni, telefono) ) ;}
-	
+
     @Override
     public int compareTo(Cliente cliente) {
-       String a=new String( this.getNombre()); 
+       String a=new String( this.getNombre());
        String b=new String( cliente.getNombre());
        int compara = a.compareTo(b);
 	       if(compara==0) {
-	    	   String c=new String( String.valueOf(this.getDni())); 
-	           String d=new String( String.valueOf(cliente.getDni())); 
+	    	   String c=new String( String.valueOf(this.getDni()));
+	           String d=new String( String.valueOf(cliente.getDni()));
 	    	   compara = c.compareTo(d);
-	    	   
+
 	       }
        return compara;
-       
-       
+
+
    }
 
 

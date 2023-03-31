@@ -3,11 +3,12 @@ package org.iesalandalus.programacion.alquilervehiculos.vista.texto;
 import javax.naming.OperationNotSupportedException;
 
 public enum Accion {
-	SALIR("Salir"){public void ejecutar() {
+	SALIR("Salir"){@Override
+	public void ejecutar() {
 					vistaTexto.terminar();
 	}},
-	
-	
+
+
 	INSERTAR_CLIENTE("Insertar cliente"){
 
 		@Override
@@ -49,7 +50,7 @@ public enum Accion {
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
 			vistaTexto.buscarAlquiler();
-			
+
 		}},
 	MODIFICAR_CLIENTE("Modificar cliente"){
 
@@ -138,7 +139,7 @@ public enum Accion {
 
 
 	protected void setVista(VistaTexto vistaTexto) {this.vistaTexto=vistaTexto;}
-	
+
 	protected abstract void ejecutar();
 
 
