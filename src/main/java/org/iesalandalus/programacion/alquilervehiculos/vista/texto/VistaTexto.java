@@ -58,10 +58,15 @@ public class VistaTexto extends Vista {
 						    modificarCliente();
 							  accion = null;break;
 
-					  case DEVOLVER_ALQUILER:
-						   	devolverAlquiler();
+//					  case DEVOLVER_ALQUILER:
+//						   	devolverAlquiler();
+//							  accion = null;break;
+					  case DEVOLVER_ALQUILER_VEHICULO:
+						   	devolverAlquilerVehiculo();
 							  accion = null;break;
-
+					  case DEVOLVER_ALQUILER_CLIENTE:
+						   	devolverAlquilerCliente();
+							  accion = null;break;
 					  case BORRAR_CLIENTE:
 						    borrarCliente();
 							  accion = null;break;
@@ -156,26 +161,26 @@ public class VistaTexto extends Vista {
 		try{controlador.modificar(cliente, nombre, telefono);}catch(Exception e) {System.out.println(e.getMessage());}
 	}
 
-	protected void devolverAlquiler() {
-		Consola.mostrarCabecera("Accion devolver alquiler");
-		Alquiler alquiler = Consola.leerAlquiler();
-		LocalDate fechaDevolucion = Consola.leerFechaDevolucion();
-		try{controlador.devolver(alquiler, fechaDevolucion);}catch(Exception e) {System.out.println(e.getMessage());}
-
-	}
+//	protected void devolverAlquiler() {
+//		Consola.mostrarCabecera("Accion devolver alquiler");
+//		Alquiler alquiler = Consola.leerAlquiler();
+//		LocalDate fechaDevolucion = Consola.leerFechaDevolucion();
+//		try{controlador.devolver(alquiler, fechaDevolucion);}catch(Exception e) {System.out.println(e.getMessage());}
+//
+//	}
 	
 	protected void devolverAlquilerCliente() {
 		Consola.mostrarCabecera("Accion devolver alquiler por cliente");
 		Cliente cliente = Consola.leerCliente();
-		//LocalDate fechaDevolucion = Consola.leerFechaDevolucion();
-		try{controlador.devolver(cliente);}catch(Exception e) {System.out.println(e.getMessage());}
+		LocalDate fechaDevolucion = Consola.leerFechaDevolucion();
+		try{controlador.devolver(cliente, fechaDevolucion);}catch(Exception e) {System.out.println(e.getMessage());}
 
 	}
 	protected void devolverAlquilerVehiculo() {
 		Consola.mostrarCabecera("Accion devolver alquiler por cliente");
 		Vehiculo vehiculo  = Consola.leerVehiculo();
-		//LocalDate fechaDevolucion = Consola.leerFechaDevolucion();
-		try{controlador.devolver(vehiculo);}catch(Exception e) {System.out.println(e.getMessage());}
+		LocalDate fechaDevolucion = Consola.leerFechaDevolucion();
+		try{controlador.devolver(vehiculo,fechaDevolucion);}catch(Exception e) {System.out.println(e.getMessage());}
 
 	}
 	

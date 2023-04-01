@@ -26,8 +26,9 @@ public class Modelo {
 		//if(fuenteDatos==null) {throw new NullPointerException("la fuente de datos no puede ser nula");}
 		this.fuenteDatos=fuentedatos;}
 
-	public Modelo() {
-		super();
+	public Modelo(FactoriaFuenteDatos factoriaFuenteDatos) {
+		setFuenteDatos(factoriaFuenteDatos.crear());
+	
 	}
 
 	public void comenzar() {

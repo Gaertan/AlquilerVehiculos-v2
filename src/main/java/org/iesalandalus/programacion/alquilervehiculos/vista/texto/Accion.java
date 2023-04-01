@@ -78,13 +78,13 @@ public enum Accion {
 	
 	
 	
-	DEVOLVER_ALQUILER("Devolver alquiler"){
-
-		@Override
-		protected void ejecutar() {
-			// TODO Auto-generated method stub
-			vistaTexto.devolverAlquiler();
-		}},
+//	DEVOLVER_ALQUILER("Devolver alquiler"){
+//
+//		@Override
+//		protected void ejecutar() {
+//			// TODO Auto-generated method stub
+//			vistaTexto.devolverAlquiler();
+//		}},
 	BORRAR_CLIENTE("Borrar cliente"){
 
 		@Override
