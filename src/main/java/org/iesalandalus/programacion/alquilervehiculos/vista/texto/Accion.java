@@ -59,6 +59,25 @@ public enum Accion {
 			// TODO Auto-generated method stub
 			vistaTexto.modificarCliente();
 		}},
+	
+	DEVOLVER_ALQUILER_CLIENTE("Devolver alquiler de cliente"){
+
+			@Override
+			protected void ejecutar() {
+				// TODO Auto-generated method stub
+				vistaTexto.devolverAlquilerCliente();
+			}},
+	
+	DEVOLVER_ALQUILER_VEHICULO("Devolver alquiler de vehiculo"){
+
+				@Override
+				protected void ejecutar() {
+					// TODO Auto-generated method stub
+					vistaTexto.devolverAlquilerVehiculo();
+				}},
+	
+	
+	
 	DEVOLVER_ALQUILER("Devolver alquiler"){
 
 		@Override
@@ -121,7 +140,18 @@ public enum Accion {
 		protected void ejecutar() {
 			// TODO Auto-generated method stub
 			vistaTexto.listarAlquileresTurismo();
+		}},
+	
+	
+	MOSTRAR_ESTADITICAS_MENSUALES("Mostrar estadisticas mensuales"){
+
+		@Override
+		protected void ejecutar() {
+			// TODO Auto-generated method stub
+			vistaTexto.mostrarEstadisticasMensualesTipoVehiculo();
 		}};
+
+	
 	protected VistaTexto vistaTexto;
 	private String cadenaAmostrar;
 

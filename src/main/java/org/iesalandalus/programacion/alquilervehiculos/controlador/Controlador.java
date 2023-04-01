@@ -40,8 +40,17 @@ public class Controlador {
 
 	public void  modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException{modeloCascada.modificar(cliente, nombre, telefono);}
 
-	public void  devolver(Alquiler alquiler, LocalDate fechaDevolucion){try {
-		modeloCascada.devolver(alquiler, fechaDevolucion);
+//	public void  devolver(Alquiler alquiler, LocalDate fechaDevolucion){try {
+//		modeloCascada.devolver(alquiler, fechaDevolucion);
+//	} catch (NullPointerException e) {
+//		// TODO Auto-generated catch block
+//		System.out.println(e.getMessage());
+//	} catch (OperationNotSupportedException e) {
+//		// TODO Auto-generated catch block
+//		System.out.println(e.getMessage());
+//	}}
+	public void  devolver(Cliente cliente, LocalDate fechaDevolucion){try {
+		modeloCascada.devolver(cliente, fechaDevolucion);
 	} catch (NullPointerException e) {
 		// TODO Auto-generated catch block
 		System.out.println(e.getMessage());
@@ -49,7 +58,15 @@ public class Controlador {
 		// TODO Auto-generated catch block
 		System.out.println(e.getMessage());
 	}}
-
+	public void  devolver(Vehiculo vehiculo , LocalDate fechaDevolucion){try {
+		modeloCascada.devolver(vehiculo, fechaDevolucion);
+	} catch (NullPointerException e) {
+		// TODO Auto-generated catch block
+		System.out.println(e.getMessage());
+	} catch (OperationNotSupportedException e) {
+		// TODO Auto-generated catch block
+		System.out.println(e.getMessage());
+	}}
 	public void  borrar(Cliente cliente) throws OperationNotSupportedException{modeloCascada.borrar(cliente);}
 
 	public void  borrar(Vehiculo vehiculo) throws OperationNotSupportedException{modeloCascada.borrar(vehiculo);}

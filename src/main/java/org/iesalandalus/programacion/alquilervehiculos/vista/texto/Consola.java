@@ -59,6 +59,16 @@ public class Consola {
 		}
 		return fecha;
 	}
+	static Integer leerMes(String mensaje){
+		System.out.println(mensaje);
+		Integer mes = null;
+		while(mes==null||(mes<0||mes>12)) {
+			try { mes=Entrada.entero();}
+			catch(Exception e) {System.out.println("algo ha salido mal leyendo la fecha;");System.out.print(e.getMessage());}
+		}
+		return mes;
+	}
+
 
 	public static Accion elegirOpcion() throws OperationNotSupportedException{
 

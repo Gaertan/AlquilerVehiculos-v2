@@ -1,13 +1,18 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista.texto;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Autobus;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Furgoneta;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.vista.Vista;
 
@@ -158,6 +163,26 @@ public class VistaTexto extends Vista {
 		try{controlador.devolver(alquiler, fechaDevolucion);}catch(Exception e) {System.out.println(e.getMessage());}
 
 	}
+	
+	protected void devolverAlquilerCliente() {
+		Consola.mostrarCabecera("Accion devolver alquiler por cliente");
+		Cliente cliente = Consola.leerCliente();
+		//LocalDate fechaDevolucion = Consola.leerFechaDevolucion();
+		try{controlador.devolver(cliente);}catch(Exception e) {System.out.println(e.getMessage());}
+
+	}
+	protected void devolverAlquilerVehiculo() {
+		Consola.mostrarCabecera("Accion devolver alquiler por cliente");
+		Vehiculo vehiculo  = Consola.leerVehiculo();
+		//LocalDate fechaDevolucion = Consola.leerFechaDevolucion();
+		try{controlador.devolver(vehiculo);}catch(Exception e) {System.out.println(e.getMessage());}
+
+	}
+	
+	
+	
+	
+	
 
 	protected void borrarCliente() {
 		Consola.mostrarCabecera("Accion borrar cliente");
@@ -247,10 +272,58 @@ public class VistaTexto extends Vista {
 
 
 
+	private EnumMap<tipoVehiculo,Integer> inicializarEstadisticas() {
+		EnumMap<tipoVehiculo,Integer> enumMapVehiculos = new EnumMap<>(tipoVehiculo.class);
+		
+		enumMapVehiculos.put(tipoVehiculo.TURISMO, 0);
+		enumMapVehiculos.put(tipoVehiculo.FURGONETA, 0);
+		enumMapVehiculos.put(tipoVehiculo.AUTOBUS, 0);
+		return enumMapVehiculos;
+		
+		
+	}
 
 
+	public void mostrarEstadisticasMensualesTipoVehiculo() {
+		
+		EnumMap<tipoVehiculo, Integer> enumMapVehiculos = inicializarEstadisticas();
+		Integer mes =Consola.leerMes("Inserte el mes para calcular las estadisticas(del 1 al 12,sin 0s)");
+		List<Alquiler> alquileres = controlador.getAlquileres();
+		Collections.sort(alquileres);
+		//obtiene los valores para el conteo, aunque se inicializa en 0 en este caso
+		//podriamos tener una app alternativo que y no se inicializaria en 0
+		Integer cuentaTurismo=enumMapVehiculos.get(tipoVehiculo.TURISMO);
+		Integer cuentaFurgoneta=enumMapVehiculos.get(tipoVehiculo.FURGONETA);
+		Integer cuentaAutobus=enumMapVehiculos.get(tipoVehiculo.AUTOBUS);
+		
+		for (Alquiler alquiler : alquileres) {
+			//comprueba que el alquiler sea del mes indicado, saca su vehiculo y comprueba el tipo de instancia
+			if(alquiler.getFechaAlquiler().getMonthValue()==mes) {
+				Vehiculo vehiculo=alquiler.getVehiculo();
 
+			 if(vehiculo instanceof Turismo) {cuentaTurismo++;}
+			 if(vehiculo instanceof Furgoneta) {cuentaFurgoneta++;}
+			 if(vehiculo instanceof Autobus) {cuentaAutobus++;}}
 
+	
+		  }
+		/*si quisieramos tener permanencia de  datos con las estadisticas podriamos hacer
+		enumMapVehiculos.put(tipoVehiculo.TURISMO, cuentaTurismo);	
+		enumMapVehiculos.put(tipoVehiculo.FURGONETA, cuentaTurismo);		
+		enumMapVehiculos.put(tipoVehiculo.AUTOBUS, cuentaTurismo);
+		
+		y hacer un return del enumMapVehiculos para pasarlo a archivo o algo	
+        */	
+		
+		Consola.mostrarCabecera("Las estadisticas de cada vehiculo para el mes de"
+		+ Month.of(mes).name()+ "son:");
+		System.out.println("Turismo: " + cuentaTurismo.toString());
+		System.out.println("Furgoneta: " + cuentaFurgoneta.toString());
+		System.out.println("Autobus: " + cuentaAutobus.toString());
+		
+		
+		
+	}
 
 
 

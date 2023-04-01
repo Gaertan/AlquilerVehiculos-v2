@@ -95,32 +95,43 @@ public class Alquileres implements IAlquileres {
 		}
 	}
 
-/*	public void devolver(Cliente cliente,LocalDate fechaDevolucion) {
+	public void devolver(Cliente cliente,LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException{
 		if(cliente==null||fechaDevolucion==null) {throw new NullPointerException("ERROR: No se puede devolver un alquiler nulo.");}
-
-		for (Alquiler alquilerB : coleccionAlquileres) {
-
-			if(alquilerB.getCliente().equals(cliente)) {
-				try {alquilerB.devolver(fechaDevolucion);}
-				catch (OperationNotSupportedException e) {e.getMessage();}}
-
-		}
-	}*/
-	@Override
-	public void devolver(Alquiler alquiler,LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException{
-		if(alquiler==null||fechaDevolucion==null) {throw new NullPointerException("ERROR: No se puede devolver un alquiler nulo.");}
-		boolean status = false;
-		for (Alquiler alquilerB : coleccionAlquileres) {
-
-
-			if(alquilerB.equals(alquiler)) {
-				/*try {alquilerB.devolver(fechaDevolucion);}
-				catch (OperationNotSupportedException e) {e.getMessage();}}*/
-				alquilerB.devolver(fechaDevolucion);}
-			status = true;
-		}
-		if (!status) {throw new OperationNotSupportedException("ERROR: No existe ningún alquiler igual.");}
+//		for (Alquiler alquilerB : coleccionAlquileres) {
+//
+//
+//			if(alquilerB.getCliente().equals(cliente)&&alquilerB.getFechaDevolucion()==null) {
+//				/*try {alquilerB.devolver(fechaDevolucion);}
+//				catch (OperationNotSupportedException e) {e.getMessage();}}*/
+//				alquilerB.devolver(fechaDevolucion);}
+//			status = true;
+//		}
+		Alquiler alquiler = null;alquiler = getAlquilerAbierto(cliente);
+		if (alquiler==null)	{throw new OperationNotSupportedException("ERROR: No existe ningún alquiler igual.");}
+		alquiler.devolver(fechaDevolucion);
 	}
+	public void devolver(Vehiculo vehiculo,LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException{
+		if(vehiculo==null||fechaDevolucion==null) {throw new NullPointerException("ERROR: No se puede devolver un alquiler nulo.");}
+		Alquiler alquiler = null;alquiler = getAlquilerAbierto(vehiculo);
+		if (alquiler==null)	{throw new OperationNotSupportedException("ERROR: No existe ningún alquiler igual.");}
+		alquiler.devolver(fechaDevolucion);
+	}
+
+//	@Override
+//	public void devolver(Alquiler alquiler,LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException{
+//		if(alquiler==null||fechaDevolucion==null) {throw new NullPointerException("ERROR: No se puede devolver un alquiler nulo.");}
+//		boolean status = false;
+//		for (Alquiler alquilerB : coleccionAlquileres) {
+//
+//
+//			if(alquilerB.equals(alquiler)) {
+//				/*try {alquilerB.devolver(fechaDevolucion);}
+//				catch (OperationNotSupportedException e) {e.getMessage();}}*/
+//				alquilerB.devolver(fechaDevolucion);}
+//			status = true;
+//		}
+//		if (!status) {throw new OperationNotSupportedException("ERROR: No existe ningún alquiler igual.");}
+//	}
 
 	@Override
 	public Alquiler buscar(Alquiler alquiler) {
@@ -143,8 +154,37 @@ public class Alquileres implements IAlquileres {
 		else throw new OperationNotSupportedException("ERROR: No existe ningún alquiler igual.");
 		}
 
+	@Override
+	public void devolver(Alquiler alquiler, LocalDate fechaDevolucion)
+			throws NullPointerException, OperationNotSupportedException {
+		// TODO Auto-generated method stub
+		
+	}
 
+	public Alquiler getAlquilerAbierto(Cliente cliente) {
+		if (cliente == null) {
+			throw new NullPointerException("ERROR: No se puede buscar un alquiler de cliente nulo.");
+		}
+		Alquiler alquiler = null;
+		for(Alquiler alquilerBusca : coleccionAlquileres) {
+			if(alquilerBusca.getFechaDevolucion()==null && alquilerBusca.getCliente().equals(cliente)) {alquiler = alquilerBusca;}
+			
+			
+		}
+		return alquiler;
+	}
 
-
+	public Alquiler getAlquilerAbierto(Vehiculo vehiculo) {
+		if (vehiculo == null) {
+			throw new NullPointerException("ERROR: No se puede buscar un alquiler de cliente nulo.");
+		}
+		Alquiler alquiler = null;
+		for(Alquiler alquilerBusca : coleccionAlquileres) {
+			if(alquilerBusca.getFechaDevolucion()==null && alquilerBusca.getVehiculo().equals(vehiculo)) {alquiler = alquilerBusca;}
+			
+			
+		}
+		return alquiler;
+	}
 
 	}

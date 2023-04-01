@@ -94,19 +94,27 @@ public class Modelo {
 
 	public void modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException {clientes.modificar(cliente, nombre, telefono);}
 
-	public void devolver(Alquiler alquiler, LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException {
-			if(alquileres.buscar(alquiler)==null) {throw new OperationNotSupportedException("ERROR: No existe el alquiler a devolver.");}
-			alquileres.devolver(alquiler, fechaDevolucion);
-			/*try {
-			alquileres.devolver(alquiler, fechaDevolucion);
-		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (OperationNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
+//	public void devolver(Alquiler alquiler, LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException {
+//			if(alquileres.buscar(alquiler)==null) {throw new OperationNotSupportedException("ERROR: No existe el alquiler a devolver.");}
+//			alquileres.devolver(alquiler, fechaDevolucion);
+//			/*try {
+//			alquileres.devolver(alquiler, fechaDevolucion);
+//		} catch (NullPointerException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (OperationNotSupportedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		*/
+//	}
+	public void devolver(Cliente cliente , LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException {
+		alquileres.devolver(cliente, fechaDevolucion);
+
+	}
+	public void devolver(Vehiculo vehiculo , LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException {
+		alquileres.devolver(vehiculo, fechaDevolucion);
+
 	}
 
 	public void borrar(Cliente cliente) throws OperationNotSupportedException {
