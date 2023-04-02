@@ -34,10 +34,17 @@ public class Modelo {
 	public void comenzar() {
 		alquileres = fuenteDatos.crearAlquileres();
 		clientes = fuenteDatos.crearClientes();
+		clientes.comenzar();
 		vehiculos = fuenteDatos.crearVehiculos() ;
 	}
 
-	public void terminar() {System.out.println("la ejecucion del modelo ha terminado");}
+	public void terminar() {
+		clientes.terminar();
+		
+		
+		
+		
+		System.out.println("la ejecucion del modelo ha terminado");}
 
 	public void insertar(Cliente cliente) throws OperationNotSupportedException {
 	/*	if(cliente==null) {throw new NullPointerException("ERROR: No existe el cliente del alquiler.");}

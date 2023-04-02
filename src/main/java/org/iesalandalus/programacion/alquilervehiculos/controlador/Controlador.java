@@ -24,7 +24,7 @@ public class Controlador {
 
 	public void  comenzar(){modeloCascada.comenzar();vistaTexto.comenzar();}
 
-	public void  terminar(){modeloCascada.terminar();vistaTexto.terminar();}
+	public void  terminar(){modeloCascada.terminar();}
 
 	public void  insertar(Cliente cliente) throws OperationNotSupportedException{modeloCascada.insertar(cliente);}
 

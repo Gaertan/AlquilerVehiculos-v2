@@ -20,4 +20,8 @@ public interface IClientes {
 
 	void modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException;
 
+	void terminar();
+
+	void comenzar();
+
 }

@@ -110,7 +110,7 @@ public class VistaTexto extends Vista {
 	}
 
 	@Override
-	public void terminar() {System.out.println("Hasta aqui la ejecucion del programa");}
+	public void terminar() {controlador.terminar();System.out.println("Hasta aqui la ejecucion del programa");}
 
 
 	protected void insertarCliente() {

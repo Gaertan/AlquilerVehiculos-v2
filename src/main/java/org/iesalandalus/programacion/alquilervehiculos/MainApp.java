@@ -15,7 +15,7 @@ public class MainApp {
 
 		/*ya que aun no tenemos el resto de opciones del patron factoria se pasarça directamente la vista texto y el modelo de memoria*/
 		Vista vistaTexto = new VistaTexto();
-		Modelo modeloCascada = new ModeloCascada(FactoriaFuenteDatos.MEMORIA);
+		Modelo modeloCascada = new ModeloCascada(FactoriaFuenteDatos.FICHEROS);
 		Controlador controlador = new Controlador(modeloCascada, vistaTexto);
 
 		controlador.comenzar();
