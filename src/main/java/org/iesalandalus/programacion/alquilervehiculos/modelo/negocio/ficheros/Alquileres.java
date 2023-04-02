@@ -1,18 +1,48 @@
 package org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Autobus;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros.Clientes;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros.Vehiculos;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Furgoneta;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IAlquileres;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros.utilidades.UtilidadesXml;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class Alquileres implements IAlquileres {
+	
+	private final String RUTA_FICHERO ="datos/alquileres.xml";
+
+	private final String RAIZ = "alquileres";
+	private final String ALQUILER="alquiler";
+					private final String DNI_CLIENTE ="dni";private final String MATRICULA_VEHICULO = "matricula";	
+				
+
+
+			
+
+		private final String FECHA_ALQUILER="fechaAlquiler";
+		private final String FECHA_DEVOLUCION="fechaDevolucion";
+						private final String FORMATO ="formato";	private final String FORMATO_FECHA = "dd/MM/yyyy";
+								
+		
+	private final String TIPO_DATO="tipodato";
+	
 	private static Alquileres instance = new Alquileres();
-	private List<Alquiler> coleccionAlquileres = new ArrayList<>();
+	private List<Alquiler> coleccionAlquileres= new ArrayList<>();
 
 	private Alquileres() {}
 
@@ -186,9 +216,152 @@ public class Alquileres implements IAlquileres {
 		}
 		return alquiler;
 	}
+	
+	
+	
+	public void comenzar() {
+		try {
+			leerXml();
+		} catch (Exception e) {
+			System.out.println("Algo ha ocurrido leyendo el archivo,puede que no se encuentre o sea nulo");
+		}
+	}
+	public void terminar() {
+		try {
+			escribirXml();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void leerXml() {
+		//creamos el documento y cargamos sus nodos
+
+		Document DOM = UtilidadesXml.xmlToDom(RUTA_FICHERO);
+		Element listaAlquileres = DOM.getDocumentElement();
+		
+		NodeList listaNodos=listaAlquileres.getChildNodes();
+		// a partir de la lista de nodos, obtenemos los elementos y atributos y creamos un cliente nuevo
+		for (int i=0; i<listaNodos.getLength();i++) 
+		{
+			Node nodo=listaNodos.item(i);
+		//tomando tan solo los nodos de tipo elemento(no comentario ni nada) creamos clientes y los insertamos en la arraylist
+			if(nodo.getNodeType() == Node.ELEMENT_NODE)
+			{
+				Alquiler alquiler = elementToAlquiler((Element)nodo);
+				try {insertar(alquiler);} catch (OperationNotSupportedException e) {}
+			}
+		}
+	}
+	
+	
+	private void escribirXml() {
+		
+		Document DOM = UtilidadesXml.crearDomVacio(RAIZ);
+		Element listaAlquileres = DOM.getDocumentElement();
+		
+		
+		for(Alquiler a:coleccionAlquileres) {
+			
+		    	try {
+					Element alquilerDOM = alquilerToElement(DOM,a);
+					listaAlquileres.appendChild(alquilerDOM);
+				} catch (DOMException e) {// TODO Auto-generated catch blocke.printStackTrace();}
+			}
+
+		UtilidadesXml.domToXml(DOM, RUTA_FICHERO);
+		}
+	}
+	
+	
+	
+
+	private Alquiler elementToAlquiler(Element element) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(FORMATO_FECHA);
+		//definimos los elementos a obtener del DOM y los objetos a crear
+		Alquiler alquiler = null;
+		Element alquilerDOM =  element;
+		String matriculaAtr = alquilerDOM.getAttribute(MATRICULA_VEHICULO);
+		String dniAtr = alquilerDOM.getAttribute(DNI_CLIENTE);
+		Element fechaAlquiler = (Element) alquilerDOM.getElementsByTagName(FECHA_ALQUILER).item(0);
+		Element fechaDevolucion = (Element) alquilerDOM.getElementsByTagName(FECHA_DEVOLUCION).item(0);
+		Cliente cliente = null;
+		Vehiculo vehiculo = null;
+		
+		//obtenemos el cliente y vehiculo asociados en el XML mediante sus ID
+		List<Cliente> listaClientes = Clientes.getInstancia().get();
+		for(Cliente clienteS:listaClientes) {if(clienteS.getDni().equalsIgnoreCase(dniAtr)) {cliente=clienteS;}}
+		List<Vehiculo> listaVehiculos = Vehiculos.getInstancia().get();
+		for(Vehiculo vehiculoS:listaVehiculos) {if(vehiculoS.getMatricula().equalsIgnoreCase(matriculaAtr)) {vehiculo=vehiculoS;}}
+		//creamos el alquiler con el cliente y vehiculos dados
+		alquiler = new Alquiler(cliente, vehiculo, LocalDate.parse(fechaAlquiler.getTextContent(), formatter));
+		//si el XML contiene una fecha de devolucion,devolvemos el alquiler para asignarsela antes de retornarlo
+		if(fechaDevolucion.getTextContent()!=null&&fechaDevolucion.getTextContent()!="") {
+			try {
+				alquiler.devolver(LocalDate.parse(fechaDevolucion.getTextContent(), formatter));
+			} catch (OperationNotSupportedException | DOMException e) {
+				e.printStackTrace();
+			}
+			}
+
+		
+		
+		return alquiler;
+	}
+	
+	
+	private Element alquilerToElement(Document DOM,Alquiler a) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(FORMATO_FECHA);
+		LocalDate fechaA = a.getFechaAlquiler();
+		fechaA.format(formatter);
+		LocalDate fechaD = a.getFechaDevolucion();
+		if(fechaD!=null) {fechaD.format(formatter);}
+		
+		Element alquilerDOM = DOM.createElement(ALQUILER);
+			alquilerDOM.setAttribute(DNI_CLIENTE, a.getCliente().getDni());
+			alquilerDOM.setAttribute(MATRICULA_VEHICULO, a.getVehiculo().getMatricula());
+
+		Element fechaAlquilerD = DOM.createElement(FECHA_ALQUILER);
+		fechaAlquilerD.setAttribute(FORMATO, FORMATO_FECHA);
+		fechaAlquilerD.setAttribute(TIPO_DATO, "LocalDate");
+		fechaAlquilerD.setTextContent(fechaA.toString());
+
+		alquilerDOM.appendChild(fechaAlquilerD);
+		
+		Element fechaDevolucionD = DOM.createElement(FECHA_DEVOLUCION);
+		if(a.getFechaDevolucion()!=null) {fechaDevolucionD.setTextContent(fechaD.toString());}
+		else{fechaDevolucionD.setTextContent("");}
+		
+		fechaDevolucionD.setAttribute(FORMATO, FORMATO_FECHA);
+		fechaDevolucionD.setAttribute(TIPO_DATO, "LocalDate");
+		alquilerDOM.appendChild(fechaDevolucionD);
+		
+		return alquilerDOM;
+		
+	}
 
 	public static IAlquileres getInstancia() {
-	return instance;
+
+		return instance;
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	}

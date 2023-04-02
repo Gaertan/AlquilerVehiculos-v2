@@ -93,7 +93,9 @@ public class VistaTexto extends Vista {
 					  case LISTAR_ALQUILERES_TURISMO:
 						    listarAlquileresTurismo();
 							  accion = null;break;
-
+					  case MOSTRAR_ESTADITICAS_MENSUALES:
+						  mostrarEstadisticasMensualesTipoVehiculo();
+						  accion = null;break;
 					  default:
 					   accion = Accion.SALIR;
 					}

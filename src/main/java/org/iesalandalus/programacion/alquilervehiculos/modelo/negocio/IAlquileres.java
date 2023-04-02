@@ -45,6 +45,10 @@ public interface IAlquileres {
 
 	void devolver(Vehiculo vehiculo, LocalDate fechaDevolucion) throws NullPointerException, OperationNotSupportedException;
 
+	void terminar();
+
+	void comenzar();
+
 
 	
 }

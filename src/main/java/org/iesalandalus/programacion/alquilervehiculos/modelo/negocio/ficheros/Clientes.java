@@ -119,10 +119,17 @@ public class Clientes implements IClientes {
 	
 	
 	public void comenzar() {
-		leerXml();
+		try {
+			leerXml();
+		} catch (Exception e) {
+			System.out.println("Algo ha ocurrido leyendo el archivo,puede que no se encuentre o sea nulo");
+		}
 	}
 	public void terminar() {
-		escribirXml();
+		try {
+			escribirXml();
+		} catch (Exception e) {
+		}
 	}
 	
 	private void leerXml() {

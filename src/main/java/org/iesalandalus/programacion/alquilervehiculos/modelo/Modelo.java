@@ -32,15 +32,18 @@ public class Modelo {
 	}
 
 	public void comenzar() {
-		alquileres = fuenteDatos.crearAlquileres();
 		clientes = fuenteDatos.crearClientes();
 		clientes.comenzar();
-		vehiculos = fuenteDatos.crearVehiculos() ;
+		vehiculos = fuenteDatos.crearVehiculos();
+		vehiculos.comenzar();
+		alquileres = fuenteDatos.crearAlquileres();
+		alquileres.comenzar();
 	}
 
 	public void terminar() {
 		clientes.terminar();
-		
+		vehiculos.terminar();
+		alquileres.terminar();
 		
 		
 		
