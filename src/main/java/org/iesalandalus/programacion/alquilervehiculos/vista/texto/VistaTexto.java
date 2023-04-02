@@ -173,14 +173,14 @@ public class VistaTexto extends Vista {
 	
 	protected void devolverAlquilerCliente() {
 		Consola.mostrarCabecera("Accion devolver alquiler por cliente");
-		Cliente cliente = Consola.leerCliente();
+		Cliente cliente = Consola.leerClienteDni();
 		LocalDate fechaDevolucion = Consola.leerFechaDevolucion();
 		try{controlador.devolver(cliente, fechaDevolucion);}catch(Exception e) {System.out.println(e.getMessage());}
 
 	}
 	protected void devolverAlquilerVehiculo() {
 		Consola.mostrarCabecera("Accion devolver alquiler por cliente");
-		Vehiculo vehiculo  = Consola.leerVehiculo();
+		Vehiculo vehiculo  = Consola.leerTurismoMatricula();
 		LocalDate fechaDevolucion = Consola.leerFechaDevolucion();
 		try{controlador.devolver(vehiculo,fechaDevolucion);}catch(Exception e) {System.out.println(e.getMessage());}
 

@@ -25,6 +25,8 @@ import org.w3c.dom.Document;
 	
 	
 	public static Document xmlToDom(String rutaXml) { 
+		
+		//se carga en un objeto Document un archivo XML(de la ruta pasada) mediante documentBuilder.parse
 	    Document document=null;
 	    try {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -40,7 +42,8 @@ import org.w3c.dom.Document;
 	
 	public static boolean domToXml(Document dom, String rutaXml) {
 		 try {
-	           
+	           //Creamos un objeto file, un transformer para adecuar el DOM al formato xml
+			
 	            File file=new File(rutaXml);
 	     
 	            TransformerFactory transformerFactory =TransformerFactory.newInstance();
@@ -48,7 +51,7 @@ import org.w3c.dom.Document;
 	            transformerFactory.setAttribute("indent-number", new Integer(4));
 	            Transformer transformer = transformerFactory.newTransformer();
 	            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-
+	            // abrimos un stream para escribir en el archivo y le añadimos el DOM de origen y la transformacion deseada
 	            FileOutputStream fileOutputStream =new FileOutputStream(file);
 	            
 	            StreamResult result = new StreamResult(new OutputStreamWriter(fileOutputStream,"UTF-8")); 
@@ -68,7 +71,7 @@ import org.w3c.dom.Document;
 	}
 	
 	public static Document crearDomVacio(String raiz) {
-		
+		//crea un documento DOM mediante DocumentBuilder y DocumentBuilderFactory cuya raiz es la String pasada 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder;
         Document document = null ;

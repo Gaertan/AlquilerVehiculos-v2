@@ -278,24 +278,30 @@ public class Alquileres implements IAlquileres {
 	
 
 	private Alquiler elementToAlquiler(Element element) {
+		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(FORMATO_FECHA);
-		//definimos los elementos a obtener del DOM y los objetos a crear
-		Alquiler alquiler = null;
+		//definimos los elementos a obtener del DOM y los objetos a crear para instanciar el alquiler
+		
+		Cliente cliente = null;
+		Vehiculo vehiculo = null;
+	
+		
 		Element alquilerDOM =  element;
 		String matriculaAtr = alquilerDOM.getAttribute(MATRICULA_VEHICULO);
 		String dniAtr = alquilerDOM.getAttribute(DNI_CLIENTE);
+		
 		Element fechaAlquiler = (Element) alquilerDOM.getElementsByTagName(FECHA_ALQUILER).item(0);
 		Element fechaDevolucion = (Element) alquilerDOM.getElementsByTagName(FECHA_DEVOLUCION).item(0);
-		Cliente cliente = null;
-		Vehiculo vehiculo = null;
+
 		
-		//obtenemos el cliente y vehiculo asociados en el XML mediante sus ID
+		//obtenemos el cliente y vehiculo asociados en el XML mediante sus ID buscandolos en sus correspondientes arraylist
 		List<Cliente> listaClientes = Clientes.getInstancia().get();
 		for(Cliente clienteS:listaClientes) {if(clienteS.getDni().equalsIgnoreCase(dniAtr)) {cliente=clienteS;}}
 		List<Vehiculo> listaVehiculos = Vehiculos.getInstancia().get();
 		for(Vehiculo vehiculoS:listaVehiculos) {if(vehiculoS.getMatricula().equalsIgnoreCase(matriculaAtr)) {vehiculo=vehiculoS;}}
-		//creamos el alquiler con el cliente y vehiculos dados
-		alquiler = new Alquiler(cliente, vehiculo, LocalDate.parse(fechaAlquiler.getTextContent(), formatter));
+		//creamos el alquiler con el cliente y vehiculos dados si se han encontrado
+		Alquiler alquiler = new Alquiler(cliente, vehiculo, LocalDate.parse(fechaAlquiler.getTextContent(), formatter));
+		
 		//si el XML contiene una fecha de devolucion,devolvemos el alquiler para asignarsela antes de retornarlo
 		if(fechaDevolucion.getTextContent()!=null&&fechaDevolucion.getTextContent()!="") {
 			try {
